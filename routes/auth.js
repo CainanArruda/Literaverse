@@ -1,8 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const { readUsers, writeUsers } = require('../utils/db');
+const UserFactory = require('../utils/userFactory');
+
+// Função auxiliar para hashear senha com SHA-256
+function hashPassword(password) {
+    return crypto.createHash('sha256').update(password).digest('hex');
+}
 
 // Rota de Registro (Cadastro)
 router.post('/register', async (req, res) => {
@@ -25,20 +31,10 @@ router.post('/register', async (req, res) => {
             return res.status(400).json({ message: 'Este nome de usuário já está em uso.' });
         }
 
-        // Criptografar senha
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(senha, salt);
+        // Criptografar senha usando SHA-256 nativo
+        const hashedPassword = hashPassword(senha);
 
-        const novoUsuario = {
-            id: 'user_' + Date.now(),
-            nome,
-            usuario,
-            email: email.toLowerCase(),
-            nascimento,
-            senha: hashedPassword,
-            dataCadastro: new Date().toISOString(),
-            foto: "https://placehold.co/150x150/5f3f71/F4E927?text=User"
-        };
+        const novoUsuario = UserFactory.createUser(nome, usuario, email, nascimento, hashedPassword);
 
         users.push(novoUsuario);
         writeUsers(users);
@@ -81,9 +77,9 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({ message: 'Usuário não encontrado.' });
         }
 
-        // Comparar senha criptografada
-        const isMatch = await bcrypt.compare(senha, usuarioEncontrado.senha);
-        if (!isMatch) {
+        // Comparar senha criptografada com SHA-256
+        const hashedPassword = hashPassword(senha);
+        if (usuarioEncontrado.senha !== hashedPassword) {
             return res.status(400).json({ message: 'Senha incorreta.' });
         }
 

@@ -1,3 +1,52 @@
+// --- PADRÃO DE DESIGN: OBSERVER ---
+
+/**
+ * Subject/Observable no padrão Observer.
+ * Permite que componentes assinem eventos de autenticação (login, logout, atualização)
+ * e atualizem a interface de forma reativa.
+ */
+class AuthSubject {
+    constructor() {
+        this.observers = [];
+    }
+
+    /**
+     * Inscreve uma função observadora
+     * @param {Function} fn 
+     */
+    subscribe(fn) {
+        if (typeof fn === 'function') {
+            this.observers.push(fn);
+        }
+    }
+
+    /**
+     * Remove a inscrição de uma função
+     * @param {Function} fn 
+     */
+    unsubscribe(fn) {
+        this.observers = this.observers.filter(sub => sub !== fn);
+    }
+
+    /**
+     * Notifica todos os observadores inscritos
+     * @param {object} event 
+     */
+    notify(event) {
+        console.log(`[Observer] Notificando observadores do evento: ${event.action}`);
+        this.observers.forEach(fn => {
+            try {
+                fn(event);
+            } catch (err) {
+                console.error("[Observer] Erro ao disparar callback do observador:", err);
+            }
+        });
+    }
+}
+
+// Instância global única do publicador para acesso nos controladores frontend
+const authNotifier = new AuthSubject();
+
 // --- SESSÃO E CONEXÃO COM O BACKEND API ---
 
 /**
@@ -23,6 +72,10 @@ async function simularLoginAPI(email, senha) {
     
     // Salva o token JWT no localStorage
     localStorage.setItem('literaverse_token', data.token);
+    
+    // Notifica os observadores do login bem-sucedido
+    authNotifier.notify({ action: 'login', user: data.user });
+    
     return data.user;
 }
 
@@ -48,6 +101,10 @@ async function simularRegistroAPI(novoUsuario) {
     
     // Salva o token JWT no localStorage
     localStorage.setItem('literaverse_token', data.token);
+    
+    // Notifica os observadores do registro bem-sucedido
+    authNotifier.notify({ action: 'register', user: data.user });
+    
     return data.user;
 }
 
@@ -101,6 +158,9 @@ async function atualizarPerfilAPI(dadosUsuario) {
         throw new Error(data.message || 'Erro ao atualizar dados do perfil.');
     }
 
+    // Notifica os observadores sobre a atualização dos dados do usuário
+    authNotifier.notify({ action: 'update', user: data.user });
+
     return data;
 }
 
@@ -125,6 +185,9 @@ async function excluirPerfilAPI() {
     if (!response.ok) {
         throw new Error(data.message || 'Erro ao excluir a conta.');
     }
+
+    // Notifica os observadores sobre a deleção de conta
+    authNotifier.notify({ action: 'delete', user: null });
 
     return data;
 }
@@ -165,6 +228,10 @@ function fazerLogout() {
     console.log("Fazendo logout...");
     localStorage.removeItem('literaverse_session');
     localStorage.removeItem('literaverse_token');
+    
+    // Notifica observadores do logout
+    authNotifier.notify({ action: 'logout', user: null });
+    
     // Redireciona para a home
     window.location.href = 'index.html';
 }

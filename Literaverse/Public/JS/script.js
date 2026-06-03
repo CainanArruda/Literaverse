@@ -86,6 +86,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     atualizarHeaderAuth();
+    
+    // Inscreve a atualização de UI do header como observadora no publicador (Observer)
+    if (typeof authNotifier !== 'undefined') {
+        authNotifier.subscribe((event) => {
+            console.log("[Observer UI] Recebido evento no header:", event);
+            // Reage ao evento correspondente
+            if (event.user) {
+                salvarSessao(event.user);
+            }
+            atualizarHeaderAuth();
+        });
+    }
 
 
      

@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
+
+function hashPassword(password) {
+    return crypto.createHash('sha256').update(password).digest('hex');
+}
 const { readUsers, writeUsers } = require('../utils/db');
 const authMiddleware = require('../middleware/auth');
 
@@ -40,10 +44,9 @@ router.put('/profile', authMiddleware, async (req, res) => {
         if (nome) user.nome = nome;
         if (nascimento) user.nascimento = nascimento;
 
-        // Se uma nova senha for fornecida, criptografa-a
+        // Se uma nova senha for fornecida, criptografa-a com SHA-256
         if (senha && senha.trim() !== '') {
-            const salt = await bcrypt.genSalt(10);
-            user.senha = await bcrypt.hash(senha, salt);
+            user.senha = hashPassword(senha);
         }
 
         users[userIndex] = user;
