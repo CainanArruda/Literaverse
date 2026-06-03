@@ -143,8 +143,8 @@ async function carregarLivrosDaAPI() {
     }
 
     try {
-        // Busca os livros de Machado de Assis
-        const response = await fetch('https://gutendex.com/books/?search=machado%20de%20assis');
+        // Busca os livros da nossa API local (com cache no servidor)
+        const response = await fetch('/api/books');
         if (!response.ok) {
             throw new Error(`A resposta da API não foi OK: ${response.statusText}`);
         }

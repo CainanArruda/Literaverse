@@ -83,7 +83,7 @@
                 <!-- IDs adicionados para o script preencher -->
                 <h1 id="perfil-nome-usuario" class="perfil-nome fonte-titulo">Carregando...</h1>
                 <p id="perfil-bio-usuario" class="perfil-bio">Carregando informações...</p>
-                <button class="botao-editar">Editar Perfil</button>
+                <button id="botao-abrir-editar" class="botao-editar">Editar Perfil</button>
                 <!-- Botão rápido para abrir o editor de escrita -->
                 <a href="escrever.html" class="botao-cadastro" aria-label="Escrever nova obra">Escrever</a>
 
@@ -139,6 +139,40 @@
                 </div>
             </section>
 
+        </div>
+
+        <div id="model-caixa">
+            <dialog class="Modal" id="model-editar-perfil">
+                <div class="Botao-fechar"><button class="botao-acao" id="FecharModalEditar">x</button></div>
+                <form id="formulario-editar-perfil" novalidate style="width: 100%; max-width: 480px; margin: 0 auto; padding: 10px;">
+                    <div class="titulo-P">
+                        <h1 class="fonte-titulo">Editar Perfil</h1>
+                    </div>
+                    <br>
+                    <div class="grupo-entrada TextoTema">
+                        <label for="edit-nome" class="form-label">Nome completo</label>
+                        <input id="edit-nome" name="nome" class="form-input" type="text" required />
+                        <div id="erro-edit-nome" class="mensagem-erro" aria-live="polite"></div>
+                    </div>
+                    <div class="grupo-entrada TextoTema">
+                        <label for="edit-nascimento" class="form-label">Data de nascimento</label>
+                        <input id="edit-nascimento" name="nascimento" class="form-input" type="date" required />
+                        <div id="erro-edit-nascimento" class="mensagem-erro" aria-live="polite"></div>
+                    </div>
+                    <div class="grupo-entrada TextoTema">
+                        <label for="edit-senha" class="form-label">Nova Senha (opcional)</label>
+                        <input id="edit-senha" name="senha" class="form-input" type="password" />
+                        <div id="erro-edit-senha" class="mensagem-erro" aria-live="polite"></div>
+                    </div>
+                    <div style="padding-top:16px">
+                        <button id="botao-salvar-perfil" type="submit" class="submit-button botao-cadastro w-100 mb-2" style="border: none;">Salvar Alterações</button>
+                        <button id="botao-excluir-conta" type="button" class="btn btn-danger w-100" style="border-radius: 9999px; font-weight: 700; background-color: var(--cor-aviso, #dc3545); border: none; padding: .5rem 1rem; color: #fff;">Excluir Conta</button>
+                    </div>
+                    <br>
+                    <div id="erro-formulario-editar" class="mensagem-erro" aria-live="assertive"></div>
+                    <div id="sucesso-formulario-editar" class="mensagem-sucesso" style="color: #28a745; font-weight: bold;" aria-live="polite"></div>
+                </form>
+            </dialog>
         </div>
     </main>
 

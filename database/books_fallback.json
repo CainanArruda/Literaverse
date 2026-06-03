@@ -1,0 +1,74 @@
+{
+  "results": [
+    {
+      "id": 55408,
+      "title": "Dom Casmurro",
+      "authors": [
+        {
+          "name": "Assis, Machado de",
+          "birth_year": 1839,
+          "death_year": 1908
+        }
+      ],
+      "formats": {
+        "image/jpeg": "../Public/Imagens/capadomcasmurro.jpg"
+      }
+    },
+    {
+      "id": 55409,
+      "title": "Memórias Postumas de Brás Cubas",
+      "authors": [
+        {
+          "name": "Assis, Machado de",
+          "birth_year": 1839,
+          "death_year": 1908
+        }
+      ],
+      "formats": {
+        "image/jpeg": "https://www.gutenberg.org/cache/epub/54829/pg54829.cover.medium.jpg"
+      }
+    },
+    {
+      "id": 55410,
+      "title": "Quincas Borba",
+      "authors": [
+        {
+          "name": "Assis, Machado de",
+          "birth_year": 1839,
+          "death_year": 1908
+        }
+      ],
+      "formats": {
+        "image/jpeg": "https://www.gutenberg.org/cache/epub/55982/pg55982.cover.medium.jpg"
+      }
+    },
+    {
+      "id": 55411,
+      "title": "Esau e Jacob",
+      "authors": [
+        {
+          "name": "Assis, Machado de",
+          "birth_year": 1839,
+          "death_year": 1908
+        }
+      ],
+      "formats": {
+        "image/jpeg": "https://www.gutenberg.org/cache/epub/56102/pg56102.cover.medium.jpg"
+      }
+    },
+    {
+      "id": 55412,
+      "title": "A Mão e a Luva",
+      "authors": [
+        {
+          "name": "Assis, Machado de",
+          "birth_year": 1839,
+          "death_year": 1908
+        }
+      ],
+      "formats": {
+        "image/jpeg": "https://www.gutenberg.org/cache/epub/55487/pg55487.cover.medium.jpg"
+      }
+    }
+  ]
+}
