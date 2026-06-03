@@ -91,8 +91,10 @@ document.addEventListener('DOMContentLoaded', () => {
      
   
     // --- Lógica da Biblioteca (carrega livros da API) ---
-    // A função é chamada aqui para garantir que o DOM está pronto.
-    carregarLivrosDaAPI();
+    // A função é chamada aqui para garantir que o DOM está pronto e apenas na página da biblioteca.
+    if (window.location.pathname.toLowerCase().includes('biblioteca.html')) {
+        carregarLivrosDaAPI();
+    }
 
     // --- Lógica do Modal (detalhe-livro.html) ---
     // Movido para dentro do DOMContentLoaded para garantir que os elementos existem
@@ -124,62 +126,93 @@ async function carregarLivrosDaAPI() {
 
     console.log("Página da biblioteca detectada. Carregando livros da API...");
 
+    // Tenta carregar do Cache primeiro
+    try {
+        const cache = localStorage.getItem('literaverse_books_cache');
+        const cacheTime = localStorage.getItem('literaverse_books_cache_time');
+        const cacheDuration = 24 * 60 * 60 * 1000; // 24 horas de cache
+
+        if (cache && cacheTime && (Date.now() - Number(cacheTime) < cacheDuration)) {
+            console.log("Carregando livros a partir do cache local...");
+            const data = JSON.parse(cache);
+            renderizarLivrosDaAPI(data, container);
+            return;
+        }
+    } catch (e) {
+        console.warn("Falha ao ler cache de livros:", e);
+    }
+
     try {
         // Busca os livros de Machado de Assis
-        const response = await fetch('https://gutendex.com/books?search=machado%20de%20assis');
+        const response = await fetch('https://gutendex.com/books/?search=machado%20de%20assis');
         if (!response.ok) {
             throw new Error(`A resposta da API não foi OK: ${response.statusText}`);
         }
         const data = await response.json();
 
-        data.results.forEach(book => {
-            // Garante que o livro tenha uma capa e um autor
-            const coverUrl = book.formats['image/jpeg'];
-            const authorName = book.authors.length > 0 ? book.authors[0].name : 'Autor desconhecido';
+        // Salvar no Cache
+        try {
+            localStorage.setItem('literaverse_books_cache', JSON.stringify(data));
+            localStorage.setItem('literaverse_books_cache_time', Date.now().toString());
+            console.log("Livros salvos no cache local.");
+        } catch (e) {
+            console.warn("Falha ao salvar cache de livros:", e);
+        }
 
-            if (coverUrl) {
-                // 1. Cria o elemento <article> principal
-                const article = document.createElement('article');
-                article.className = 'cartao-livro';
-
-                // 2. Cria o link e a imagem
-                const link = document.createElement('a');
-                link.href = '#'; // Link placeholder, pois não há página de detalhes dinâmica
-
-                const img = document.createElement('img');
-                img.src = coverUrl;
-                img.alt = `Capa do livro ${book.title}`;
-                img.className = 'imagem-livro';
-                img.loading = 'lazy'; // Otimização: carrega a imagem apenas quando estiver perto de ser exibida
-
-                link.appendChild(img);
-
-                // 3. Cria a div de informações
-                const infoDiv = document.createElement('div');
-                infoDiv.className = 'info-livro';
-
-                const titleH3 = document.createElement('h3');
-                titleH3.className = 'titulo-livro';
-                titleH3.textContent = book.title;
-
-                const authorP = document.createElement('p');
-                authorP.className = 'autor-livro';
-                authorP.textContent = authorName;
-
-                infoDiv.appendChild(titleH3);
-                infoDiv.appendChild(authorP);
-
-                // 4. Monta o card
-                article.appendChild(link);
-                article.appendChild(infoDiv);
-
-                // 5. Adiciona o card ao grid na página
-                container.appendChild(article);
-            }
-        });
+        renderizarLivrosDaAPI(data, container);
     } catch (error) {
         console.error('Erro ao buscar ou processar livros da API:', error);
-        // Opcional: Mostra uma mensagem de erro amigável para o usuário
-        container.innerHTML += '<p style="color: var(--cor-aviso); grid-column: 1 / -1;">Não foi possível carregar novos livros no momento.</p>';
+        // Fallback: Se a API falhar mas tivermos algum cache antigo, usamos ele
+        const expiredCache = localStorage.getItem('literaverse_books_cache');
+        if (expiredCache) {
+            console.log("Falha na API. Usando cache expirado como fallback...");
+            const data = JSON.parse(expiredCache);
+            renderizarLivrosDaAPI(data, container);
+        } else {
+            container.innerHTML += '<p style="color: var(--cor-aviso); grid-column: 1 / -1;">Não foi possível carregar novos livros no momento.</p>';
+        }
     }
+}
+
+function renderizarLivrosDaAPI(data, container) {
+    container.innerHTML = ""; // Garante que limpa o container antes de renderizar
+    data.results.forEach(book => {
+        const coverUrl = book.formats['image/jpeg'];
+        const authorName = book.authors.length > 0 ? book.authors[0].name : 'Autor desconhecido';
+
+        if (coverUrl) {
+            const article = document.createElement('article');
+            article.className = 'cartao-livro';
+
+            const link = document.createElement('a');
+            link.href = '#';
+
+            const img = document.createElement('img');
+            img.src = coverUrl;
+            img.alt = `Capa do livro ${book.title}`;
+            img.className = 'imagem-livro';
+            img.loading = 'lazy';
+
+            link.appendChild(img);
+
+            const infoDiv = document.createElement('div');
+            infoDiv.className = 'info-livro';
+
+            const titleH3 = document.createElement('h3');
+            titleH3.className = 'titulo-livro';
+            titleH3.textContent = book.title;
+
+            const authorP = document.createElement('p');
+            authorP.className = 'autor-livro';
+            authorP.textContent = authorName;
+
+            infoDiv.appendChild(titleH3);
+            infoDiv.appendChild(authorP);
+
+            article.appendChild(link);
+            article.appendChild(infoDiv);
+
+            container.appendChild(article);
+        }
+    });
 }
