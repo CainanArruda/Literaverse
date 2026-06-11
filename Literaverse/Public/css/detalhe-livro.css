@@ -3,52 +3,91 @@
 .detalhe-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 2rem;
+    gap: 3rem;
+    align-items: flex-start;
 }
 
 .detalhe-imagem {
-    flex: 1 1 300px; /* Flex-grow, flex-shrink, flex-basis */
+    flex: 1 1 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: sticky;
+    top: 6rem;
 }
 
 .imagem-livro-detalhe {
     max-width: 100%;
     height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    margin-bottom: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    border: 1px solid var(--borda);
+    transition: transform 0.3s ease;
+}
+
+body.tema-escuro .imagem-livro-detalhe {
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6);
+}
+
+.imagem-livro-detalhe:hover {
+    transform: scale(1.01);
 }
 
 .metadados {
     width: 100%;
-    padding: 1rem;
-    background-color: var(--superficie);
+    padding: 1.5rem;
+    background: var(--bg-secundario);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
     border: 1px solid var(--borda);
-    border-radius: 8px;
+    border-radius: 12px;
+    margin-top: 1.5rem;
+    box-shadow: var(--sombra-premium);
 }
 
 .metadados p {
-    margin-bottom: 0.5rem;
-    font-size: 0.9rem;
+    margin-bottom: 0.65rem;
+    font-size: 0.92rem;
+    color: var(--texto-secundario);
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dashed var(--borda);
+    padding-bottom: 0.5rem;
+}
+
+.metadados p:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.metadados strong {
+    color: var(--texto);
 }
 
 .detalhe-info {
-    flex: 2 1 500px; /* Ocupa mais espaço */
+    flex: 2 1 500px;
+}
+
+@media (max-width: 991px) {
+    .detalhe-imagem {
+        position: relative;
+        top: 0;
+    }
 }
 
 @media (max-width: 768px) {
     .detalhe-grid {
         flex-direction: column;
+        gap: 2rem;
     }
 
     .detalhe-imagem,
     .detalhe-info {
-        flex: 1 1 100%; /* Ocupa a largura total */
+        flex: 1 1 100%;
     }
 
     .imagem-livro-detalhe {
-        max-width: 250px; /* Um tamanho razoável para mobile */
+        max-width: 250px;
     }
 }

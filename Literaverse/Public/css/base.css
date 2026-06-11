@@ -4,39 +4,49 @@
 
 /* Variáveis de tema e reset base */
 :root {
-    --cor-primaria: #343D75;
-    --cor-secundaria: #996E9C;
-    --cor-terciaria: #6B74B8;
-    --cor-destaque: #1A1934;
-    --fundo-claro: #F4E0CC;
-    --fundo-escuro: #1A1934;
-    --superficie-clara: #F4E0CC;
-    --superficie-escura: #343D75;
-    --texto-claro: #F4E0CC;
-    --texto-escuro: #000000;
-    --texto-secundario-claro: rgba(244, 224, 204, 0.8);
-    --texto-secundario-escuro: rgba(0, 0, 0, 0.7);
-    --cor-amarela: #FFD700;
-    /* Compatibilidade — aliases usados por módulos fragmentados */
-    --bg: var(--superficie-clara);
+    /* Paleta HSL Coesa - Roxo e Amarelo Premium */
+    --h-roxo: 262;
+    --h-amarelo: 48;
+    
+    --cor-primaria: hsl(var(--h-roxo), 48%, 24%);     /* Roxo profundo */
+    --cor-secundaria: hsl(var(--h-roxo), 55%, 52%);   /* Roxo médio/suave */
+    --cor-terciaria: hsl(var(--h-roxo), 60%, 42%);    /* Roxo ativo */
+    --cor-destaque: hsl(var(--h-roxo), 65%, 12%);     /* Roxo escuro */
+    
+    --cor-amarela: hsl(var(--h-amarelo), 100%, 50%);  /* Amarelo Ouro */
+    --cor-amarela-hover: hsl(var(--h-amarelo), 100%, 58%);
+    --cor-amarela-contraste: hsl(var(--h-amarelo), 100%, 35%); /* Leitura em fundos claros */
+
+    /* Variáveis de Fundo e Superfície */
+    --fundo-claro: hsl(260, 24%, 97%);               /* Off-white lilás */
+    --fundo-escuro: hsl(260, 48%, 5%);                /* Preto arroxeado espacial */
+    
+    --superficie-clara: hsla(260, 20%, 93%, 0.7);
+    --superficie-escura: hsla(260, 35%, 11%, 0.65);
+    
+    --texto-claro: hsl(260, 20%, 96%);
+    --texto-escuro: hsl(260, 50%, 10%);
+    --texto-secundario-claro: hsla(260, 20%, 96%, 0.7);
+    --texto-secundario-escuro: hsla(260, 50%, 10%, 0.65);
+    
+    /* Aliases para compatibilidade legada */
+    --bg: var(--fundo-claro);
     --bg-secundario: var(--superficie-clara);
     --texto: var(--texto-escuro);
     --texto-secundario: var(--texto-secundario-escuro);
-    --placeholder: rgba(0, 0, 0, .35);
-    --borda: rgba(0, 0, 0, .08);
+    --placeholder: hsla(260, 50%, 10%, 0.4);
+    --borda: hsla(260, 50%, 10%, 0.08);
 
-    --input-bg-light: #F6EAFB;
-    --input-border-light: var(--cor-amarela);
-    --input-bg-dark: rgba(255, 255, 255, 0.03);
-    --input-border-dark: var(--cor-amarela);
+    --input-bg-light: hsl(260, 20%, 99%);
+    --input-border-light: hsla(var(--h-roxo), 40%, 45%, 0.18);
+    --input-bg-dark: hsla(260, 35%, 8%, 0.55);
+    --input-border-dark: hsla(var(--h-roxo), 40%, 65%, 0.12);
 
-    /* Círculos de background (modo claro) */
-    --circulo1-start: rgba(153, 110, 156, 0.95);
-    --circulo1-mid: rgba(107, 116, 184, 0.45);
-    --circulo1-end: rgba(244, 224, 204, 0.0);
-    --circulo2-start: rgba(107, 116, 184, 0.75);
-    --circulo2-mid: rgba(153, 110, 156, 0.35);
-    --circulo2-end: rgba(244, 224, 204, 0.0);
+    /* Glassmorphism e Efeitos */
+    --glass-blur: blur(14px);
+    --glass-border-light: rgba(255, 255, 255, 0.4);
+    --glass-border-dark: rgba(255, 255, 255, 0.05);
+    --sombra-premium: 0 10px 30px -10px rgba(107, 33, 168, 0.08);
 }
 
 /* Reset e base */
@@ -51,16 +61,19 @@ html {
 }
 
 body {
-    background: linear-gradient(180deg, #F4E0CC 0%, #996E9C 100%);
     background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.4s ease, color 0.4s ease;
 }
-
 
 .logo-imagem {
     color: var(--texto-claro);
+    transition: filter 0.3s ease;
 }
 
 body.tema-claro .logo-imagem {
@@ -69,18 +82,23 @@ body.tema-claro .logo-imagem {
 
 body.tema-claro {
     --texto-escuro: var(--cor-destaque);
+    background-image: radial-gradient(circle at 10% 20%, hsl(260, 20%, 96%) 0%, hsl(260, 20%, 91%) 90%);
+    color: var(--texto-escuro);
+    --bg: var(--fundo-claro);
+    --bg-secundario: var(--superficie-clara);
+    --texto: var(--texto-escuro);
+    --texto-secundario: var(--texto-secundario-escuro);
+    --borda: hsla(var(--h-roxo), 40%, 15%, 0.06);
 }
 
 body.tema-escuro {
-    background: linear-gradient(180deg, #1A1934 0%, #343D75 100%);
-    background-attachment: fixed;
+    background-image: radial-gradient(circle at 50% -20%, hsl(262, 45%, 11%) 0%, var(--fundo-escuro) 80%);
     color: var(--texto-claro);
-    --placeholder: rgba(255, 255, 255, 0.6);
-    --borda: rgba(255, 255, 255, 0.06);
+    --placeholder: hsla(260, 20%, 96%, 0.45);
+    --borda: hsla(260, 20%, 96%, 0.06);
     --texto-secundario-escuro: var(--texto-secundario-claro);
-    /* aliases para compatibilidade com módulos que usam --bg / --texto */
-    --bg: var(--superficie-escura);
-    --bg-secundario: rgba(255, 255, 255, 0.02);
+    --bg: var(--fundo-escuro);
+    --bg-secundario: var(--superficie-escura);
     --texto: var(--texto-claro);
     --texto-secundario: var(--texto-secundario-claro);
 }
@@ -103,18 +121,6 @@ body.tema-escuro {
 /* Ajusta a cor do ícone do menu hambúrguer no tema escuro */
 body.tema-escuro .navbar-toggler-icon {
     filter: invert(1);
-}
-
-
-
-/* Tema escuro (variáveis dinâmicas) */
-body.tema-escuro {
-    --circulo1-start: rgba(255, 255, 255, 0.20);
-    --circulo1-mid: rgba(255, 255, 255, 0.08);
-    --circulo1-end: rgba(255, 255, 255, 0.00);
-    --circulo2-start: rgba(255, 255, 255, 0.16);
-    --circulo2-mid: rgba(255, 255, 255, 0.06);
-    --circulo2-end: rgba(255, 255, 255, 0.00);
 }
 
 .fonte-titulo {

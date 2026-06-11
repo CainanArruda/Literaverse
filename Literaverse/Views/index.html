@@ -11,6 +11,8 @@
 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../Public/css/base.css">
+    <link rel="stylesheet" href="../Public/css/layout.css">
+    <link rel="stylesheet" href="../Public/css/header.css">
     <link rel="stylesheet" href="../Public/css/components.css">
     <link rel="stylesheet" href="../Public/css/cards.css">
     <link rel="stylesheet" href="../Public/css/footer.css">
@@ -29,8 +31,7 @@
         <div class="container">
 
             <a href="index.html" class="navbar-brand logo">
-                <img src="../Public/Imagens/logo sem fundo.png" alt="Literaverse" class="logo-imagem"
-                    style="width: 120px; height: 100px;">
+                <img src="../Public/Imagens/logo sem fundo.png" alt="Literaverse" class="logo-imagem">
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMobile"
@@ -80,7 +81,7 @@
                 <h1 class="titulo-heroi fonte-titulo">Navegue por Galáxias de Histórias</h1>
                 <p class="subtitulo-heroi">Conecte-se com leitores, descubra novos autores ou publique sua própria
                     jornada literária no Literaverse.</p>
-                <a href="biblioteca.html" class="botao-cadastro">Explorar a Biblioteca</a>
+                <a href="biblioteca.html" class="botao-heroi">Explorar a Biblioteca</a>
             </div>
         </section>
 
@@ -89,20 +90,60 @@
                 <h2 class="titulo-secao fonte-titulo">Recém-Chegados à Galáxia</h2>
                 <div class="grid-livros">
                     <article class="cartao-livro">
-                        <a href="detalhe-livro.html"><img src="../Public/Imagens/capadomcasmurro.jpg"
-                                alt="Capa do livro Dom Casmurro" class="imagem-livro"></a>
+                        <a href="detalhe-livro.html" style="text-decoration: none; color: inherit; position: relative;">
+                            <img src="../Public/Imagens/capadomcasmurro.jpg" alt="Capa do livro Dom Casmurro" class="imagem-livro">
+                            <div class="info-hover">
+                                <h4 class="fonte-titulo" style="font-size: 1.15rem; margin-bottom: 0.35rem;">Dom Casmurro</h4>
+                                <p style="font-size: 0.85rem; opacity: 0.85; margin: 0;">Machado de Assis</p>
+                                <span style="font-size: 0.72rem; color: var(--cor-amarela); margin-top: 0.5rem; font-weight: 600;">Romance Clássico</span>
+                            </div>
+                        </a>
+                        <div class="info-livro">
+                            <h3 class="titulo-livro">Dom Casmurro</h3>
+                            <p class="autor-livro">Machado de Assis</p>
+                        </div>
                     </article>
                     <article class="cartao-livro">
-                        <a href="detalhe-livro.html"><img src="../Public/Imagens/capaartedaguerra.jpg"
-                                alt="Capa do livro A Arte da Guerra" class="imagem-livro"></a>
+                        <a href="detalhe-livro.html" style="text-decoration: none; color: inherit; position: relative;">
+                            <img src="../Public/Imagens/capaartedaguerra.jpg" alt="Capa do livro A Arte da Guerra" class="imagem-livro">
+                            <div class="info-hover">
+                                <h4 class="fonte-titulo" style="font-size: 1.15rem; margin-bottom: 0.35rem;">A Arte da Guerra</h4>
+                                <p style="font-size: 0.85rem; opacity: 0.85; margin: 0;">Sun Tzu</p>
+                                <span style="font-size: 0.72rem; color: var(--cor-amarela); margin-top: 0.5rem; font-weight: 600;">Filosofia & Estratégia</span>
+                            </div>
+                        </a>
+                        <div class="info-livro">
+                            <h3 class="titulo-livro">A Arte da Guerra</h3>
+                            <p class="autor-livro">Sun Tzu</p>
+                        </div>
                     </article>
                     <article class="cartao-livro">
-                        <a href="detalhe-livro.html"><img src="../Public/Imagens/capaalicenopais.jpg"
-                                alt="Capa do livro Alice no País das Maravilhas" class="imagem-livro"></a>
+                        <a href="detalhe-livro.html" style="text-decoration: none; color: inherit; position: relative;">
+                            <img src="../Public/Imagens/capaalicenopais.jpg" alt="Capa do livro Alice no País das Maravilhas" class="imagem-livro">
+                            <div class="info-hover">
+                                <h4 class="fonte-titulo" style="font-size: 1.15rem; margin-bottom: 0.35rem;">Alice no País das Maravilhas</h4>
+                                <p style="font-size: 0.85rem; opacity: 0.85; margin: 0;">Lewis Carroll</p>
+                                <span style="font-size: 0.72rem; color: var(--cor-amarela); margin-top: 0.5rem; font-weight: 600;">Fantasia & Aventura</span>
+                            </div>
+                        </a>
+                        <div class="info-livro">
+                            <h3 class="titulo-livro">Alice no País das Maravilhas</h3>
+                            <p class="autor-livro">Lewis Carroll</p>
+                        </div>
                     </article>
                     <article class="cartao-livro">
-                        <a href="detalhe-livro.html"><img src="../Public/Imagens/capavidassecas.jpg"
-                                alt="Capa do livro Vidas Secas" class="imagem-livro"></a>
+                        <a href="detalhe-livro.html" style="text-decoration: none; color: inherit; position: relative;">
+                            <img src="../Public/Imagens/capavidassecas.jpg" alt="Capa do livro Vidas Secas" class="imagem-livro">
+                            <div class="info-hover">
+                                <h4 class="fonte-titulo" style="font-size: 1.15rem; margin-bottom: 0.35rem;">Vidas Secas</h4>
+                                <p style="font-size: 0.85rem; opacity: 0.85; margin: 0;">Graciliano Ramos</p>
+                                <span style="font-size: 0.72rem; color: var(--cor-amarela); margin-top: 0.5rem; font-weight: 600;">Modernismo Brasileiro</span>
+                            </div>
+                        </a>
+                        <div class="info-livro">
+                            <h3 class="titulo-livro">Vidas Secas</h3>
+                            <p class="autor-livro">Graciliano Ramos</p>
+                        </div>
                     </article>
                 </div>
             </div>

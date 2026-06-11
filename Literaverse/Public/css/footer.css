@@ -1,16 +1,26 @@
 /* Rodapé */
 .rodape {
-    background: var(--bg);
-    padding: 3.5rem 0;
-    margin-top: 3rem;
-    font-size: 0.85rem;
+    background: var(--bg-secundario) !important;
+    border-top: 1px solid var(--borda);
+    padding: 4rem 0 3rem;
+    margin-top: 4rem;
+    font-size: 0.88rem;
     width: 100%;
+    color: var(--texto-secundario);
+}
+
+body.tema-claro .rodape {
+    background: rgba(250, 248, 252, 0.7) !important;
+}
+
+body.tema-escuro .rodape {
+    background: rgba(10, 7, 20, 0.7) !important;
 }
 
 .grid-rodape {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 2.5rem;
     text-align: center;
     width: 100%;
     max-width: 1200px;
@@ -23,6 +33,7 @@
         text-align: left;
         align-items: start;
         justify-content: space-between;
+        gap: 2rem;
     }
 }
 
@@ -38,26 +49,39 @@
 @media(min-width:768px) {
     .coluna-rodape {
         align-items: flex-start;
+        margin: 0;
     }
 }
 
 .titulo-rodape {
+    font-family: 'Lora', serif;
     font-weight: 700;
-    margin-bottom: .5rem
+    font-size: 1.1rem;
+    margin-bottom: 0.85rem;
+    color: var(--texto);
 }
 
-.rodape,
-.rodape p,
+.rodape p {
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+}
+
 .rodape a {
-    font-weight: 500
+    color: var(--texto);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.rodape a:hover {
+    color: var(--cor-secundaria);
 }
 
 .lista-redes {
     display: flex;
-    gap: .75rem;
+    gap: 1rem;
     align-items: center;
     justify-content: center;
-    margin: 1rem 0;
+    margin-top: 0.5rem;
 }
 
 @media(min-width:768px) {
@@ -71,15 +95,21 @@
     height: 28px;
     display: inline-block;
     object-fit: contain;
-    transition: filter .15s ease, opacity .15s;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s;
+    opacity: 0.75;
+}
+
+.icone-rede:hover {
+    transform: translateY(-3px) scale(1.1);
+    opacity: 1;
 }
 
 body.tema-claro .icone-rede {
-    filter: invert(1)
+    filter: invert(1) brightness(0.2);
 }
 
 body.tema-escuro .icone-rede {
-    filter: none
+    filter: drop-shadow(0 0 4px rgba(255,255,255,0.1));
 }
 
 .rodape .container {
@@ -100,8 +130,11 @@ body.tema-escuro .icone-rede {
 }
 
 .rodape .copyright {
-    margin-top: 1.5rem;
+    margin-top: 2rem;
+    font-size: 0.8rem;
+    border-top: 1px solid var(--borda);
+    padding-top: 1.5rem;
     text-align: center;
     width: 100%;
-    padding: 0 1rem;
+    color: var(--texto-secundario);
 }

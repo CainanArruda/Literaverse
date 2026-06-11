@@ -11,6 +11,8 @@
 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>    
     <link rel="stylesheet" href="../Public/css/base.css">
+    <link rel="stylesheet" href="../Public/css/layout.css">
+    <link rel="stylesheet" href="../Public/css/header.css">
     <link rel="stylesheet" href="../Public/css/components.css">
     <link rel="stylesheet" href="../Public/css/cards.css">
     <link rel="stylesheet" href="../Public/css/footer.css">
@@ -27,8 +29,7 @@
         <div class="container">
 
             <a href="index.html" class="navbar-brand logo">
-                <img src="../Public/Imagens/logo sem fundo.png" alt="Literaverse" class="logo-imagem"
-                    style="width: 120px; height: 100px;">
+                <img src="../Public/Imagens/logo sem fundo.png" alt="Literaverse" class="logo-imagem">
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMobile"
@@ -73,9 +74,9 @@
     </header>
 
     <main class="container conteudo-principal">
-        <h1 class="titulo-pagina fonte-titulo">Biblioteca</h1>
+        <h1 class="titulo-pagina fonte-titulo" style="margin-top: 2rem; font-weight: 700; color: var(--texto);">Biblioteca</h1>
 
-        <div class="barra-filtros" aria-hidden="true" style="margin:1.5rem 0;display:flex;gap:1rem;align-items:center;">
+        <div class="barra-filtros" aria-hidden="true">
             <span class="rotulo-filtro">Filtrar por:</span>
             <select class="campo-filtro">
                 <option>Gênero</option>
@@ -84,11 +85,10 @@
                 <option>Romance</option>
             </select> 
             <select class="campo-filtro">
-                <option style="border-radius: 50%;">Classificação</option>
-                <option style="border-radius: 50%;">5 Estrelas</option>
+                <option>Classificação</option>
+                <option>5 Estrelas</option>
                 <option>4+ Estrelas</option>
             </select>
-
         </div>
 
         <section class="grid-livros"></section>
@@ -131,6 +131,7 @@
         crossorigin="anonymous"></script>
 
     <script src="../Public/JS/Models/authModel.js"></script>
+    <script src="../Public/JS/Models/LivrosModel.js"></script>
     <script src="../Public/JS/script.js"></script>
 </body>
 

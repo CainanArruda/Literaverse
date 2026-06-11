@@ -1,11 +1,22 @@
 /* Header e navegação */
 .cabecalho {
-    background: var(--bg);
+    background: var(--bg-secundario) !important;
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
     position: sticky;
     top: 0;
     z-index: 40;
-    padding: 12px 0;
-    transition: background .2s, color .2s;
+    padding: 8px 0;
+    transition: background 0.3s ease, border-color 0.3s ease;
+    border-bottom: 1px solid var(--borda) !important;
+}
+
+body.tema-claro .cabecalho {
+    background: rgba(250, 248, 252, 0.8) !important;
+}
+
+body.tema-escuro .cabecalho {
+    background: rgba(10, 7, 20, 0.8) !important;
 }
 
 .cabecalho-grid {
@@ -20,18 +31,25 @@
     align-items: center;
     gap: .5rem;
     text-decoration: none;
-    color: inherit;
+    color: var(--texto);
 }
 
 .logo-imagem {
-    width: 40px;
-    height: 40px;
+    width: 100px !important;
+    height: 80px !important;
     object-fit: contain;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.logo:hover .logo-imagem {
+    transform: scale(1.05);
 }
 
 .logo-texto {
+    font-family: 'Lora', serif;
     font-weight: 700;
-    font-size: 1.15rem;
+    font-size: 1.25rem;
+    color: var(--texto);
 }
 
 .nav-principal {
@@ -50,12 +68,14 @@
 
 .link-nav {
     text-decoration: none;
-    color: inherit;
+    color: var(--texto);
     font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
 }
 
 .link-nav:hover {
-    color: var(--cor-terciaria);
+    color: var(--cor-secundaria);
 }
 
 /* Busca */
@@ -65,155 +85,63 @@
     align-items: center;
 }
 
-.campo-busca {
-    width: 220px;
-    padding: .5rem 1rem .5rem 2.5rem;
-    border-radius: 9999px;
-    border: 1px solid var(--borda);
+.form-busca .form-control {
+    width: 180px;
+    padding: .5rem 1.2rem;
+    border-radius: 50px;
+    border: 1px solid var(--input-border-light);
     background: var(--input-bg-light);
     color: var(--texto);
-    box-shadow: 0 4px 10px rgba(2, 6, 23, 0.04);
-    transition: box-shadow .15s ease, border-color .12s ease, background .12s ease;
+    font-size: 0.88rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.campo-busca::placeholder {
-    color: var(--placeholder);
-}
-
-.campo-busca:focus {
-    outline: none;
-    box-shadow: 0 6px 18px rgba(85, 38, 109, 0.12);
-    border-color: var(--cor-destaque);
-}
-
-.icone-busca {
-    position: absolute;
-    left: .75rem;
-    width: 1.25rem;
-    height: 1.25rem;
-    color: var(--placeholder);
-    pointer-events: none;
-}
-
-/* Tema escuro: garantir contraste do campo de busca */
-body.tema-escuro .form-busca {
-    /* tornar o contêiner levemente translúcido para destaque */
-    background: transparent;
-}
-
-body.tema-escuro .campo-busca {
-    background: var(--input-bg-dark);
+body.tema-escuro .form-busca .form-control {
     border: 1px solid var(--input-border-dark);
-    color: var(--texto);
-    box-shadow: 0 6px 18px rgba(2, 6, 23, 0.45) inset;
-}
-
-body.tema-escuro .campo-busca::placeholder {
-    color: var(--placeholder);
-}
-
-body.tema-escuro .icone-busca {
-    color: var(--placeholder);
-}
-
-/* Botão hambúrguer (mobile) */
-.botao-menu {
-    display: none;
-    position: relative;
-    width: 40px;
-    height: 40px;
-    border: 0;
-    background: transparent;
-    border-radius: 8px;
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.botao-menu .barra {
-    display: block;
-    width: 4px;
-    height: 4px;
-    background: currentColor;
-    border-radius: 50%;
-    position: relative;
-    transition: transform .25s ease, opacity .2s ease;
-}
-
-.botao-menu .barra+.barra {
-    margin-top: 4px
-}
-
-body.tema-claro .botao-menu {
-    color: var(--texto-escuro);
-}
-
-body.tema-escuro .botao-menu {
+    background: var(--input-bg-dark);
     color: var(--texto-claro);
 }
 
-/* Navbar mobile collapsed panel */
-@media (max-width:820px) {
-    .botao-menu {
-        display: flex
-    }
+.form-busca .form-control:focus {
+    width: 240px;
+    border-color: var(--cor-amarela-contraste) !important;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px hsla(var(--h-amarelo), 100%, 50%, 0.15) !important;
+}
 
-    .nav-principal {
-        position: absolute;
-        top: 100%;
-        right: 0;
-        left: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 1.25rem;
-        padding: 1rem 1.25rem 1.75rem;
-        background: rgba(7, 16, 36, 0.92);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border-bottom: 1px solid var(--borda);
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-        transform: translateY(-4px);
-        transition: opacity .22s ease, transform .25s ease, visibility .25s step-end;
-        z-index: 60
-    }
+body.tema-escuro .form-busca .form-control:focus {
+    border-color: var(--cor-amarela) !important;
+    background: hsl(260, 35%, 8%);
+    box-shadow: 0 0 0 3px hsla(var(--h-amarelo), 100%, 50%, 0.2) !important;
+}
 
-    body.tema-claro .nav-principal {
-        background: rgba(251, 251, 253, 0.95)
-    }
+.form-busca .form-control::placeholder {
+    color: var(--placeholder);
+}
 
-    .nav-principal.aberta {
-        opacity: 1;
-        visibility: visible;
-        pointer-events: auto;
-        transform: translateY(0);
-        transition: opacity .22s ease, transform .25s ease, visibility 0s
-    }
+/* Navbar mobile collapsed panel override for Bootstrap support */
+.cabecalho .navbar-toggler {
+    border-radius: 8px;
+    padding: 6px 10px;
+    border: 1px solid var(--borda);
+    transition: all 0.2s ease;
+}
 
-    .nav-principal .lista-nav {
-        flex-direction: column;
-        gap: .85rem;
-        display: flex
-    }
+.cabecalho .navbar-toggler:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
 
-    .nav-principal .acoes-usuario {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: .5rem
-    }
+.cabecalho .navbar-toggler-icon {
+    width: 22px;
+    height: 22px;
+}
 
-    .nav-principal .form-busca {
-        width: 100%
+@media (max-width: 991px) {
+    .form-busca .form-control {
+        width: 100%;
     }
-
-    .nav-principal .campo-busca {
-        width: 100%
-    }
-
-    .cabecalho-grid {
-        position: relative
+    .form-busca .form-control:focus {
+        width: 100%;
     }
 }

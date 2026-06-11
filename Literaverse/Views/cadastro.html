@@ -11,6 +11,8 @@
     
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../Public/css/base.css">
+    <link rel="stylesheet" href="../Public/css/layout.css">
+    <link rel="stylesheet" href="../Public/css/header.css">
     <link rel="stylesheet" href="../Public/css/components.css">
     <link rel="stylesheet" href="../Public/css/cards.css">
     <link rel="stylesheet" href="../Public/css/footer.css">
@@ -28,8 +30,7 @@
         <div class="container">
 
             <a href="index.html" class="navbar-brand logo">
-                <img src="../Public/Imagens/logo sem fundo.png" alt="Literaverse" class="logo-imagem"
-                    style="width: 120px; height: 100px;">
+                <img src="../Public/Imagens/logo sem fundo.png" alt="Literaverse" class="logo-imagem">
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMobile"
@@ -73,36 +74,38 @@
         </div>
     </header>
 
-    <main class="container conteudo-principal">
-        <h1 class="titulo-pagina fonte-titulo">Crie sua conta!</h1>
-        <h3 class="titulo-pagina fonte-titulo">Para navegar ou publicar sua obra literaria!</h3>
+    <main class="container conteudo-principal" style="padding: 3rem 0;">
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <h1 class="fonte-titulo" style="font-weight: 700; font-size: 2.2rem; color: var(--texto); margin-bottom: 0.5rem;">Crie sua conta</h1>
+            <p style="color: var(--texto-secundario); font-size: 1rem;">Para navegar ou publicar sua obra literária no Literaverse</p>
+        </div>
 
         <form id="formulario-cadastro" novalidate method="post" action="#" class="registration-form">
-            <div class="grupo-entrada">
+            <div class="grupo-entrada" style="margin-bottom: 1.2rem;">
                 <label for="nome" class="form-label">Nome completo</label>
                 <input id="nome" name="nome" class="form-input" type="text" required />
-                <div id="erro-nome" class="mensagem-erro" aria-live="polite"></div>
+                <div id="erro-nome" class="mensagem-erro" style="color: var(--cor-amarela-contraste); font-size: 0.82rem; margin-top: 0.25rem;" aria-live="polite"></div>
             </div>
 
-            <div class="grupo-entrada">
+            <div class="grupo-entrada" style="margin-bottom: 1.2rem;">
                 <label for="usuario" class="form-label">Nome de usuário</label>
                 <input id="usuario" name="usuario" class="form-input" type="text" required />
-                <div id="erro-usuario" class="mensagem-erro" aria-live="polite"></div>
+                <div id="erro-usuario" class="mensagem-erro" style="color: var(--cor-amarela-contraste); font-size: 0.82rem; margin-top: 0.25rem;" aria-live="polite"></div>
             </div>
 
-            <div class="grupo-entrada">
+            <div class="grupo-entrada" style="margin-bottom: 1.2rem;">
                 <label for="email" class="form-label">Email</label>
                 <input id="email" name="email" class="form-input" type="email" placeholder="exemplo@email.com" required />
-                <div id="erro-email" class="mensagem-erro" aria-live="polite"></div>
+                <div id="erro-email" class="mensagem-erro" style="color: var(--cor-amarela-contraste); font-size: 0.82rem; margin-top: 0.25rem;" aria-live="polite"></div>
             </div>
 
-            <div class="grupo-entrada">
+            <div class="grupo-entrada" style="margin-bottom: 1.2rem;">
                 <label for="nascimento" class="form-label">Data de nascimento</label>
                 <input id="nascimento" name="nascimento" class="form-input" type="date" required />
-                <div id="erro-nascimento" class="mensagem-erro" aria-live="polite"></div>
+                <div id="erro-nascimento" class="mensagem-erro" style="color: var(--cor-amarela-contraste); font-size: 0.82rem; margin-top: 0.25rem;" aria-live="polite"></div>
             </div>
 
-            <div class="grupo-entrada">
+            <div class="grupo-entrada" style="margin-bottom: 1.2rem;">
                 <label for="senha" class="form-label">Senha</label>
                 <div class="campo-senha-container">
                     <input id="senha" name="senha" class="form-input" type="password" required />
@@ -119,10 +122,10 @@
                         </svg>
                     </button>
                 </div>
-                <div id="erro-senha" class="mensagem-erro" aria-live="polite"></div>
+                <div id="erro-senha" class="mensagem-erro" style="color: var(--cor-amarela-contraste); font-size: 0.82rem; margin-top: 0.25rem;" aria-live="polite"></div>
             </div>
 
-            <div class="grupo-entrada">
+            <div class="grupo-entrada" style="margin-bottom: 1.5rem;">
                 <label for="confirmar-senha" class="form-label">Confirmar senha</label>
                 <div class="campo-senha-container">
                     <input id="confirmar-senha" name="confirmar-senha" class="form-input" type="password" required />
@@ -140,21 +143,20 @@
                         </svg>
                     </button>
                 </div>
-                <div id="erro-confirmar-senha" class="mensagem-erro" aria-live="polite"></div>
+                <div id="erro-confirmar-senha" class="mensagem-erro" style="color: var(--cor-amarela-contraste); font-size: 0.82rem; margin-top: 0.25rem;" aria-live="polite"></div>
             </div>
 
-            <div class="terms">
-                <input id="termos" name="termos" type="checkbox" class="terms__input" required />
-                <label for="termos" class="terms__label">Li e aceito os <a href="#" class="link-destaque">termos de
-                        uso</a> e a <a href="#" class="link-destaque">política de privacidade</a>.</label>
+            <div class="terms" style="margin-bottom: 1.5rem; display: flex; align-items: flex-start; gap: 0.5rem;">
+                <input id="termos" name="termos" type="checkbox" class="terms__input" style="margin-top: 0.25rem; cursor: pointer;" required />
+                <label for="termos" class="terms__label" style="font-size: 0.88rem; color: var(--texto-secundario); cursor: pointer; line-height: 1.4;">Li e aceito os <a href="#" style="color: var(--cor-secundaria); text-decoration: underline;">termos de uso</a> e a <a href="#" style="color: var(--cor-secundaria); text-decoration: underline;">política de privacidade</a>.</label>
             </div>
 
             <div style="padding-top:8px">
-                <button id="botao-enviar" type="submit" class="submit-button botao-cadastro">Criar conta</button>
+                <button id="botao-enviar" type="submit" class="submit-button botao-cadastro" style="width: 100%;">Criar conta</button>
             </div>
 
-            <div id="sucesso-formulario" class="mensagem-sucesso" aria-live="polite"></div>
-            <div id="erro-formulario" class="mensagem-erro" aria-live="assertive"></div>
+            <div id="sucesso-formulario" class="mensagem-sucesso" style="color: #28a745; font-weight: bold; margin-top: 1rem; text-align: center;" aria-live="polite"></div>
+            <div id="erro-formulario" class="mensagem-erro" style="color: var(--cor-amarela-contraste); font-weight: bold; margin-top: 1rem; text-align: center;" aria-live="assertive"></div>
 
              <p>
                 Já tem uma conta? <a href="login.html" class="link-destaque">Faça login aqui</a>.

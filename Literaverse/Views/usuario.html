@@ -12,6 +12,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../Public/css/base.css">
     <link rel="stylesheet" href="../Public/css/layout.css">
+    <link rel="stylesheet" href="../Public/css/header.css">
     <link rel="stylesheet" href="../Public/css/components.css">
     <link rel="stylesheet" href="../Public/css/cards.css">
     <link rel="stylesheet" href="../Public/css/perfil.css">
@@ -31,8 +32,7 @@
         <div class="container">
 
             <a href="index.html" class="navbar-brand logo">
-                <img src="../Public/Imagens/logo sem fundo.png" alt="Literaverse" class="logo-imagem"
-                    style="width: 120px; height: 100px;">
+                <img src="../Public/Imagens/logo sem fundo.png" alt="Literaverse" class="logo-imagem">
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMobile"
@@ -143,34 +143,34 @@
 
         <div id="model-caixa">
             <dialog class="Modal" id="model-editar-perfil">
-                <div class="Botao-fechar"><button class="botao-acao" id="FecharModalEditar">x</button></div>
-                <form id="formulario-editar-perfil" novalidate style="width: 100%; max-width: 480px; margin: 0 auto; padding: 10px;">
+                <div class="Botao-fechar" style="position: absolute; right: 1.5rem; top: 1.5rem;"><button class="botao-acao" id="FecharModalEditar">✕</button></div>
+                <form id="formulario-editar-perfil" novalidate style="width: 100%; max-width: 420px; margin: 0 auto; padding: 1rem 0 0;">
                     <div class="titulo-P">
-                        <h1 class="fonte-titulo">Editar Perfil</h1>
+                        <h1 class="fonte-titulo" style="font-weight: 700; font-size: 1.8rem; margin: 0;">Editar Perfil</h1>
                     </div>
                     <br>
-                    <div class="grupo-entrada TextoTema">
+                    <div class="grupo-entrada TextoTema" style="margin-bottom: 1rem;">
                         <label for="edit-nome" class="form-label">Nome completo</label>
                         <input id="edit-nome" name="nome" class="form-input" type="text" required />
-                        <div id="erro-edit-nome" class="mensagem-erro" aria-live="polite"></div>
+                        <div id="erro-edit-nome" class="mensagem-erro" style="color: var(--cor-amarela-contraste); font-size: 0.8rem; margin-top: 0.25rem;" aria-live="polite"></div>
                     </div>
-                    <div class="grupo-entrada TextoTema">
+                    <div class="grupo-entrada TextoTema" style="margin-bottom: 1rem;">
                         <label for="edit-nascimento" class="form-label">Data de nascimento</label>
                         <input id="edit-nascimento" name="nascimento" class="form-input" type="date" required />
-                        <div id="erro-edit-nascimento" class="mensagem-erro" aria-live="polite"></div>
+                        <div id="erro-edit-nascimento" class="mensagem-erro" style="color: var(--cor-amarela-contraste); font-size: 0.8rem; margin-top: 0.25rem;" aria-live="polite"></div>
                     </div>
-                    <div class="grupo-entrada TextoTema">
+                    <div class="grupo-entrada TextoTema" style="margin-bottom: 1.5rem;">
                         <label for="edit-senha" class="form-label">Nova Senha (opcional)</label>
                         <input id="edit-senha" name="senha" class="form-input" type="password" />
-                        <div id="erro-edit-senha" class="mensagem-erro" aria-live="polite"></div>
+                        <div id="erro-edit-senha" class="mensagem-erro" style="color: var(--cor-amarela-contraste); font-size: 0.8rem; margin-top: 0.25rem;" aria-live="polite"></div>
                     </div>
-                    <div style="padding-top:16px">
-                        <button id="botao-salvar-perfil" type="submit" class="submit-button botao-cadastro w-100 mb-2" style="border: none;">Salvar Alterações</button>
-                        <button id="botao-excluir-conta" type="button" class="btn btn-danger w-100" style="border-radius: 9999px; font-weight: 700; background-color: var(--cor-aviso, #dc3545); border: none; padding: .5rem 1rem; color: #fff;">Excluir Conta</button>
+                    <div style="padding-top:8px">
+                        <button id="botao-salvar-perfil" type="submit" class="submit-button botao-cadastro w-100 mb-2">Salvar Alterações</button>
+                        <button id="botao-excluir-conta" type="button" class="btn btn-danger w-100" style="border-radius: 9999px; font-weight: 600; background-color: #dc3545; border: none; padding: .6rem 1.35rem; color: #fff; font-size: 0.92rem;">Excluir Conta</button>
                     </div>
                     <br>
-                    <div id="erro-formulario-editar" class="mensagem-erro" aria-live="assertive"></div>
-                    <div id="sucesso-formulario-editar" class="mensagem-sucesso" style="color: #28a745; font-weight: bold;" aria-live="polite"></div>
+                    <div id="erro-formulario-editar" class="mensagem-erro" style="color: var(--cor-amarela-contraste); font-weight: bold; text-align: center;" aria-live="assertive"></div>
+                    <div id="sucesso-formulario-editar" class="mensagem-sucesso" style="color: #28a745; font-weight: bold; text-align: center;" aria-live="polite"></div>
                 </form>
             </dialog>
         </div>

@@ -23,9 +23,9 @@ async function fetchAndCacheBooks() {
     try {
         console.log("[Server Cache] Buscando livros atualizados da API externa Gutendex...");
         
-        // Define um tempo limite (timeout) de 8 segundos para evitar que a API trave
+        // Define um tempo limite (timeout) de 25 segundos para dar tempo suficiente para a API Gutendex lenta
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 8000);
+        const timeoutId = setTimeout(() => controller.abort(), 25000);
         
         const response = await fetch('https://gutendex.com/books/?search=machado%20de%20assis', {
             signal: controller.signal

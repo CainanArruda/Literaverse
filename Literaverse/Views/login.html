@@ -12,6 +12,8 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <link rel="stylesheet" href="../Public/css/base.css">
+    <link rel="stylesheet" href="../Public/css/layout.css">
+    <link rel="stylesheet" href="../Public/css/header.css">
     <link rel="stylesheet" href="../Public/css/components.css">
     <link rel="stylesheet" href="../Public/css/cards.css">
     <link rel="stylesheet" href="../Public/css/footer.css">
@@ -28,8 +30,7 @@
     <header class="cabecalho navbar navbar-expand-lg sticky-top">
         <div class="container">
             <a href="index.html" class="navbar-brand logo">
-                <img src="../Public/Imagens/logo sem fundo.png" alt="Literaverse" class="logo-imagem"
-                    style="width: 120px; height: 100px;">
+                <img src="../Public/Imagens/logo sem fundo.png" alt="Literaverse" class="logo-imagem">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMobile"
                 aria-controls="navMobile" aria-expanded="false" aria-label="Abrir menu">
@@ -64,19 +65,21 @@
         </div>
     </header>
 
-    <main class="container conteudo-principal">
-        <h1 class="titulo-pagina fonte-titulo">Login</h1>
-        <h3 class="titulo-pagina fonte-titulo">Acesse sua conta para continuar</h3>
+    <main class="container conteudo-principal" style="padding: 4rem 0;">
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <h1 class="fonte-titulo" style="font-weight: 700; font-size: 2.2rem; color: var(--texto); margin-bottom: 0.5rem;">Acesse sua conta</h1>
+            <p style="color: var(--texto-secundario); font-size: 1rem;">Para navegar ou publicar sua obra literária no Literaverse</p>
+        </div>
 
         <form id="formulario-login" novalidate method="post" action="#" class="registration-form">
             
-            <div class="grupo-entrada">
+            <div class="grupo-entrada" style="margin-bottom: 1.25rem;">
                 <label for="email" class="form-label">Email</label>
                 <input id="email" name="email" class="form-input" type="email" placeholder="exemplo@email.com" />
-                <div id="erro-email-login" class="mensagem-erro" aria-live="polite"></div>
+                <div id="erro-email-login" class="mensagem-erro" style="color: var(--cor-amarela-contraste); font-size: 0.82rem; margin-top: 0.25rem;" aria-live="polite"></div>
             </div>
 
-            <div class="grupo-entrada">
+            <div class="grupo-entrada" style="margin-bottom: 1.5rem;">
                 <label for="senha" class="form-label">Senha</label>
                 <div class="campo-senha-container">
                     <input id="senha" name="senha" class="form-input" type="password" />
@@ -93,17 +96,17 @@
                         </svg>
                     </button>
                 </div>
-                <div id="erro-senha-login" class="mensagem-erro" aria-live="polite"></div>
+                <div id="erro-senha-login" class="mensagem-erro" style="color: var(--cor-amarela-contraste); font-size: 0.82rem; margin-top: 0.25rem;" aria-live="polite"></div>
             </div>
 
             <div style="padding-top:8px">
-                <button id="botao-enviar-login" type="submit" class="submit-button botao-cadastro">Entrar</button>
+                <button id="botao-enviar-login" type="submit" class="submit-button botao-cadastro" style="width: 100%;">Entrar</button>
             </div>
 
-            <div id="erro-formulario-login" class="mensagem-erro" aria-live="assertive"></div>
+            <div id="erro-formulario-login" class="mensagem-erro" style="color: var(--cor-amarela-contraste); font-weight: bold; margin-top: 1rem; text-align: center;" aria-live="assertive"></div>
 
-            <p style="text-align: center; margin-top: 1rem;">
-                Não tem uma conta? <a href="cadastro.html" class="botao-cadastro">Cadastre-se aqui</a>.
+            <p style="text-align: center; margin-top: 1.5rem; color: var(--texto-secundario); font-size: 0.9rem;">
+                Não tem uma conta? <a href="cadastro.html" style="color: var(--cor-secundaria); font-weight: 600; text-decoration: underline;">Cadastre-se aqui</a>.
             </p>
         </form>
     </main>

@@ -1,172 +1,174 @@
 /* Editor específico */
 .editor-container {
     border: 1px solid var(--borda);
-    border-radius: 8px;
+    border-radius: 16px;
     background: var(--bg-secundario);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
     position: relative;
-    /* necessário para o glow pseudo-element */
     overflow: visible;
+    box-shadow: var(--sombra-premium);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.tema-escuro .editor-container {
+    background: hsla(260, 35%, 8%, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: inset 0 2px 20px rgba(0, 0, 0, 0.5), var(--sombra-premium);
 }
 
 .toolbar {
     display: flex;
-    gap: .5rem;
+    gap: .6rem;
     flex-wrap: wrap;
-    padding: .5rem;
+    padding: .85rem;
     border-bottom: 1px solid var(--borda);
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.02));
+    background: rgba(255, 255, 255, 0.01);
+    border-radius: 16px 16px 0 0;
+    align-items: center;
+}
+
+body.tema-escuro .toolbar {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
 }
 
 .toolbar select,
 .toolbar button {
-    padding: .4rem .6rem;
+    padding: .45rem .8rem;
     background: transparent;
     border: 1px solid transparent;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
+    color: var(--texto);
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .toolbar button:hover,
 .toolbar select:hover {
-    background: rgba(0, 0, 0, 0.04);
+    background: rgba(107, 33, 168, 0.06);
+    color: var(--cor-secundaria);
+}
+
+body.tema-escuro .toolbar button:hover,
+body.tema-escuro .toolbar select:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--cor-amarela);
 }
 
 /* Melhor contraste para select/options no editor */
 .toolbar select {
     background-color: var(--bg);
-    color: var(--texto);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    min-width: 84px;
+    border: 1px solid var(--borda);
+    min-width: 90px;
+    outline: none;
 }
 
-.toolbar select:focus {
-    outline: 2px solid rgba(100, 140, 255, 0.22);
-}
-
-/* Força cores das opções (funciona na maioria dos navegadores modernos) */
 .toolbar select option {
     background-color: var(--bg);
     color: var(--texto);
 }
 
-/* Ajustes específicos para tema escuro — garante contraste forte */
-body.tema-escuro .toolbar select,
-body.tema-escuro .toolbar select option {
-    background-color: #0f1724;
-    /* tom escuro neutro */
-    color: #e6eef8;
-    /* texto claro */
-    -webkit-text-fill-color: #e6eef8;
-    /* Chrome/Safari */
-}
-
-/* Melhor apresentação do desplegable no Windows/Edge */
-.toolbar select::-ms-expand {
-    /* remove ícone default no IE/Edge */
-    display: block;
-}
-
 .editor {
     min-height: 60vh;
-    padding: 1rem;
+    padding: 2rem;
     outline: none;
     white-space: pre-wrap;
+    font-family: 'Lora', serif;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--texto);
+    border-radius: 0 0 16px 16px;
 }
 
-/* Garantir que toolbar e editor fiquem acima do glow */
+body.tema-escuro .editor {
+    color: hsl(260, 20%, 92%);
+}
+
 .toolbar,
 .editor {
     position: relative;
     z-index: 1;
 }
 
-/* Luminância suave atrás do quadro de escrita */
-.editor-container::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 120%;
-    height: 120%;
-    pointer-events: none;
-    z-index: 0;
-    filter: blur(40px);
-    opacity: 0.7;
-    background: radial-gradient(600px 300px at 25% 20%, rgba(255, 255, 255, 0.03), transparent 20%),
-        radial-gradient(600px 300px at 75% 80%, rgba(100, 140, 255, 0.02), transparent 20%);
-    border-radius: 10px;
-}
-
-/* Acentuar o brilho no tema escuro */
-body.tema-escuro .editor-container::before {
-    background: radial-gradient(600px 300px at 25% 20%, rgba(255, 255, 255, 0.04), transparent 18%),
-        radial-gradient(600px 300px at 75% 80%, rgba(80, 120, 200, 0.06), transparent 22%);
-    filter: blur(48px);
-    opacity: 0.95;
-}
-
-/* Contraste melhorado para tema escuro */
-body.tema-escuro .editor-container {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(0, 0, 0, 0.06));
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6) inset;
-}
-
-body.tema-escuro .toolbar {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(0, 0, 0, 0.06));
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-}
-
-body.tema-escuro .toolbar button,
-body.tema-escuro .toolbar select {
-    color: #e6eef8;
-}
-
-body.tema-escuro .editor {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(0, 0, 0, 0.12));
-    color: #e6eef8;
-    border: 1px solid rgba(255, 255, 255, 0.03);
-}
-
 /* Placeholder visual quando editor estiver vazio */
 .editor[contenteditable]:empty:before {
     content: attr(data-placeholder);
-    color: rgba(230, 238, 248, 0.35);
+    color: var(--placeholder);
+    font-style: italic;
     pointer-events: none;
 }
 
 @media (max-width:700px) {
     .toolbar {
-        gap: .3rem
+        gap: .4rem;
+        padding: .6rem;
     }
 
     .editor {
-        min-height: 50vh
+        min-height: 50vh;
+        padding: 1.25rem;
     }
 }
 
-/* Painel de rascunhos (lado direito) */
+/* Painel de rascunhos (lado direito deslizante) */
 .rascunhos-panel {
     position: fixed;
-    right: 1.5rem;
-    top: 6rem;
-    width: 320px;
-    max-height: 70vh;
-    background: var(--bg-secundario);
-    border: 1px solid var(--borda);
-    border-radius: 8px;
-    padding: .75rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    overflow: auto;
+    right: 2rem;
+    top: 7rem;
+    width: 340px;
+    max-height: 75vh;
+    background: var(--bg-secundario) !important;
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--borda) !important;
+    border-radius: 16px;
+    padding: 1.25rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    overflow-y: auto;
     z-index: 80;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.tema-claro .rascunhos-panel {
+    background: rgba(255, 255, 255, 0.95) !important;
+}
+
+body.tema-escuro .rascunhos-panel {
+    background: rgba(20, 15, 35, 0.95) !important;
 }
 
 .rascunhos-panel .rascunhos-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: .5rem
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--borda);
+    padding-bottom: 0.75rem;
+}
+
+.rascunhos-panel .rascunhos-header h3 {
+    font-family: 'Lora', serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--texto);
+}
+
+.rascunhos-panel .rascunhos-header button {
+    background: transparent;
+    border: none;
+    color: var(--texto-secundario);
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: color 0.2s;
+}
+
+.rascunhos-panel .rascunhos-header button:hover {
+    color: var(--texto);
 }
 
 .lista-rascunhos {
@@ -177,56 +179,138 @@ body.tema-escuro .editor {
 
 .rascunho-item {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: .5rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.04)
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 0.85rem;
+    border-bottom: 1px solid var(--borda);
+    transition: background-color 0.2s;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+
+.rascunho-item:hover {
+    background-color: rgba(107, 33, 168, 0.04);
+}
+
+body.tema-escuro .rascunho-item:hover {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.rascunho-item .meta strong {
+    color: var(--texto);
+    font-size: 0.95rem;
+    display: block;
+    margin-bottom: 0.15rem;
 }
 
 .rascunho-item .meta small {
     color: var(--texto-secundario);
+    font-size: 0.78rem;
 }
 
-.rascunho-actions {
+.rascunho-item .rascunho-actions {
     display: flex;
-    gap: .5rem
+    gap: .5rem;
+    justify-content: flex-end;
+    margin-top: 0.25rem;
 }
 
-/* Modal simples centralizado */
+.rascunho-item .rascunho-actions button {
+    padding: 0.3rem 0.75rem;
+    font-size: 0.8rem;
+    border-radius: 4px;
+}
+
+.rascunhos-actions {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.rascunhos-actions button {
+    width: 100%;
+}
+
+/* Modal de inserção WYSIWYG */
 .modal {
     position: fixed;
     inset: 0;
     display: none;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 90
+    background: rgba(10, 7, 20, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 999;
 }
 
 .modal-conteudo {
-    background: var(--bg);
-    padding: 1rem;
-    border-radius: 8px;
-    max-width: 520px;
-    width: 92%;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3)
+    background: var(--bg-secundario);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--borda);
+    padding: 2rem;
+    border-radius: 16px;
+    max-width: 480px;
+    width: 90%;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+body.tema-claro .modal-conteudo {
+    background: #ffffff;
+}
+
+.modal-conteudo h2 {
+    font-family: 'Lora', serif;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--texto);
+    font-size: 1.4rem;
 }
 
 .modal .form-row {
-    margin-bottom: .6rem
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.modal .form-row label {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--texto);
+}
+
+.modal .form-row input,
+.modal .form-row select {
+    padding: 0.65rem 0.85rem;
+    border-radius: 8px;
+    border: 1px solid var(--input-border-light);
+    background: var(--input-bg-light);
+    color: var(--texto);
+    font-size: 0.9rem;
+    outline: none;
+    width: 100%;
+}
+
+body.tema-escuro .modal .form-row input,
+body.tema-escuro .modal .form-row select {
+    border: 1px solid var(--input-border-dark);
+    background: var(--input-bg-dark);
+    color: var(--texto-claro);
 }
 
 .modal .modal-actions {
     display: flex;
-    gap: .5rem;
-    justify-content: flex-end
+    gap: .75rem;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
 }
 
 @media (max-width:900px) {
     .rascunhos-panel {
         position: static;
-        width: auto;
-        max-height: 200px;
-        margin-top: 1rem
+        width: 100%;
+        max-height: 300px;
+        margin-top: 2rem;
     }
 }

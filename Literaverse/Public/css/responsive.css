@@ -136,6 +136,11 @@
 
     .cartao-livro {
         max-width: 200px;
+        height: 310px;
+    }
+
+    .imagem-livro {
+        height: 210px !important;
     }
 }
 

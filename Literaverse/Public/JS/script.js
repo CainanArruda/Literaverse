@@ -103,8 +103,11 @@ document.addEventListener('DOMContentLoaded', () => {
      
   
     // --- Lógica da Biblioteca (carrega livros da API) ---
-    // A função é chamada aqui para garantir que o DOM está pronto e apenas na página da biblioteca.
-    if (window.location.pathname.toLowerCase().includes('biblioteca.html')) {
+    const pathLower = window.location.pathname.toLowerCase();
+    const isBiblioteca = pathLower.includes('biblioteca') || 
+                         (document.querySelector('.grid-livros') && !document.querySelector('.titulo-heroi'));
+    
+    if (isBiblioteca) {
         carregarLivrosDaAPI();
     }
 
@@ -127,92 +130,141 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // --- Lógica da Página da Biblioteca (biblioteca.html) ---
 /**
- * Busca livros populares de Machado de Assis da API Gutendex e os adiciona à página.
+ * Busca livros da API local (que faz proxy/cache do Gutendex) e os adiciona à página.
  */
 async function carregarLivrosDaAPI() {
     const container = document.querySelector('.grid-livros');
-    // Se o container não existir, significa que não estamos na página da biblioteca.
     if (!container) {
         return;
     }
 
     console.log("Página da biblioteca detectada. Carregando livros da API...");
 
-    // Tenta carregar do Cache primeiro
+    // 1. Mostrar o cache local instantaneamente (Stale-While-Revalidate)
+    let temCacheInicial = false;
     try {
         const cache = localStorage.getItem('literaverse_books_cache');
-        const cacheTime = localStorage.getItem('literaverse_books_cache_time');
-        const cacheDuration = 24 * 60 * 60 * 1000; // 24 horas de cache
-
-        if (cache && cacheTime && (Date.now() - Number(cacheTime) < cacheDuration)) {
-            console.log("Carregando livros a partir do cache local...");
+        if (cache) {
             const data = JSON.parse(cache);
-            renderizarLivrosDaAPI(data, container);
-            return;
+            if (data && (Array.isArray(data) || Array.isArray(data.results))) {
+                console.log("[SWR] Carregando livros do cache do navegador instantaneamente.");
+                renderizarLivrosDaAPI(data, container);
+                temCacheInicial = true;
+            }
         }
     } catch (e) {
-        console.warn("Falha ao ler cache de livros:", e);
+        console.warn("[SWR] Falha ao carregar cache do local storage:", e);
     }
 
+    // 2. Se não tinha cache, mostra a lista estática local instantaneamente
+    if (!temCacheInicial && typeof livros !== 'undefined' && Array.isArray(livros)) {
+        console.log("[SWR] Renderizando livros locais como fallback inicial.");
+        renderizarLivrosDaAPI(livros, container);
+    }
+
+    // 3. Busca livros atualizados do servidor de forma assíncrona
     try {
-        // Busca os livros da nossa API local (com cache no servidor)
         const response = await fetch('/api/books');
         if (!response.ok) {
             throw new Error(`A resposta da API não foi OK: ${response.statusText}`);
         }
         const data = await response.json();
 
-        // Salvar no Cache
+        // Salva o novo resultado no cache local para futuras cargas instantâneas
         try {
             localStorage.setItem('literaverse_books_cache', JSON.stringify(data));
-            localStorage.setItem('literaverse_books_cache_time', Date.now().toString());
-            console.log("Livros salvos no cache local.");
         } catch (e) {
-            console.warn("Falha ao salvar cache de livros:", e);
+            console.warn("Falha ao atualizar o cache local:", e);
         }
 
+        // Atualiza a interface com os dados frescos
         renderizarLivrosDaAPI(data, container);
     } catch (error) {
-        console.error('Erro ao buscar ou processar livros da API:', error);
-        // Fallback: Se a API falhar mas tivermos algum cache antigo, usamos ele
-        const expiredCache = localStorage.getItem('literaverse_books_cache');
-        if (expiredCache) {
-            console.log("Falha na API. Usando cache expirado como fallback...");
-            const data = JSON.parse(expiredCache);
-            renderizarLivrosDaAPI(data, container);
-        } else {
-            container.innerHTML += '<p style="color: var(--cor-aviso); grid-column: 1 / -1;">Não foi possível carregar novos livros no momento.</p>';
+        console.error('Erro ao buscar livros atualizados:', error);
+        // Se a tela estiver totalmente vazia (nem cache nem estático carregaram), exibe o erro
+        if (container.children.length === 0) {
+            container.innerHTML = '<p style="color: var(--cor-amarela); grid-column: 1 / -1; font-weight: 500; text-align: center; margin-top: 2rem;">Não foi possível carregar os livros no momento. Por favor, tente novamente mais tarde.</p>';
         }
     }
 }
 
 function renderizarLivrosDaAPI(data, container) {
-    container.innerHTML = ""; // Garante que limpa o container antes de renderizar
-    data.results.forEach(book => {
-        const coverUrl = book.formats['image/jpeg'];
-        const authorName = book.authors.length > 0 ? book.authors[0].name : 'Autor desconhecido';
+    if (!container) return;
+    container.innerHTML = ""; // Limpa o container antes de renderizar
+
+    if (!data) {
+        container.innerHTML = '<p style="color: var(--cor-amarela); grid-column: 1 / -1; font-weight: 500; text-align: center; margin-top: 2rem;">Nenhum livro disponível no momento.</p>';
+        return;
+    }
+
+    // Suporta tanto o formato Gutendex { results: [...] } quanto formato array direto [...]
+    const booksList = Array.isArray(data) ? data : (data.results && Array.isArray(data.results) ? data.results : []);
+
+    if (booksList.length === 0) {
+        container.innerHTML = '<p style="color: var(--cor-amarela); grid-column: 1 / -1; font-weight: 500; text-align: center; margin-top: 2rem;">Nenhum livro disponível no momento.</p>';
+        return;
+    }
+
+    booksList.forEach(book => {
+        const coverUrl = book.imagem || (book.formats && book.formats['image/jpeg']) || null;
+        const authorName = book.autor || (book.authors && book.authors.length > 0 ? book.authors[0].name : 'Autor desconhecido');
+        const title = book.titulo || book.title || 'Sem título';
 
         if (coverUrl) {
             const article = document.createElement('article');
             article.className = 'cartao-livro';
 
+            // Criar link
             const link = document.createElement('a');
-            link.href = '#';
+            link.href = 'detalhe-livro.html';
+            link.style.textDecoration = 'none';
+            link.style.color = 'inherit';
+            link.style.position = 'relative';
 
+            // Criar imagem
             const img = document.createElement('img');
             img.src = coverUrl;
-            img.alt = `Capa do livro ${book.title}`;
+            img.alt = `Capa do livro ${title}`;
             img.className = 'imagem-livro';
             img.loading = 'lazy';
 
-            link.appendChild(img);
+            // Criar info-hover (Premium overlay de slide-up)
+            const infoHover = document.createElement('div');
+            infoHover.className = 'info-hover';
+            
+            const hoverTitle = document.createElement('h4');
+            hoverTitle.className = 'fonte-titulo';
+            hoverTitle.style.fontSize = '1.15rem';
+            hoverTitle.style.marginBottom = '0.35rem';
+            hoverTitle.textContent = title;
 
+            const hoverAuthor = document.createElement('p');
+            hoverAuthor.style.fontSize = '0.85rem';
+            hoverAuthor.style.opacity = '0.85';
+            hoverAuthor.style.margin = '0';
+            hoverAuthor.textContent = authorName;
+
+            const hoverTag = document.createElement('span');
+            hoverTag.style.fontSize = '0.72rem';
+            hoverTag.style.color = 'var(--cor-amarela)';
+            hoverTag.style.marginTop = '0.5rem';
+            hoverTag.style.fontWeight = '600';
+            hoverTag.textContent = 'Obras Clássicas';
+
+            infoHover.appendChild(hoverTitle);
+            infoHover.appendChild(hoverAuthor);
+            infoHover.appendChild(hoverTag);
+
+            link.appendChild(img);
+            link.appendChild(infoHover);
+
+            // Criar info-livro (título e autor abaixo da capa)
             const infoDiv = document.createElement('div');
             infoDiv.className = 'info-livro';
 
             const titleH3 = document.createElement('h3');
             titleH3.className = 'titulo-livro';
-            titleH3.textContent = book.title;
+            titleH3.textContent = title;
 
             const authorP = document.createElement('p');
             authorP.className = 'autor-livro';
