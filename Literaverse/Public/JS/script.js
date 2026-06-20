@@ -119,7 +119,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (botaoCurtir && modal && fecharModal) {
         botaoCurtir.onclick = function AbrirModel() {
-            modal.showModal();
+            const sessao = typeof getSessao === 'function' ? getSessao() : null;
+            if (sessao) {
+                // Usuário está logado, alternar estado visual do Curtir
+                const icone = botaoCurtir.querySelector('i');
+                const jaCurtido = botaoCurtir.getAttribute('aria-pressed') === 'true';
+                
+                if (jaCurtido) {
+                    botaoCurtir.setAttribute('aria-pressed', 'false');
+                    if (icone) icone.className = 'bx bx-heart';
+                    botaoCurtir.style.color = '';
+                    botaoCurtir.style.borderColor = '';
+                } else {
+                    botaoCurtir.setAttribute('aria-pressed', 'true');
+                    if (icone) icone.className = 'bx bxs-heart';
+                    botaoCurtir.style.color = 'var(--cor-terciaria)';
+                    botaoCurtir.style.borderColor = 'var(--cor-terciaria)';
+                }
+            } else {
+                // Usuário não está logado, abrir modal de login
+                modal.showModal();
+            }
         }
 
         fecharModal.onclick = function FecharModel() {
@@ -164,7 +184,9 @@ async function carregarLivrosDaAPI() {
 
     // 3. Busca livros atualizados do servidor de forma assíncrona
     try {
-        const response = await fetch('/api/books');
+        const usarUrlAbsoluta = (window.location.port && window.location.port !== '3000') || window.location.protocol === 'file:';
+        const baseUrl = usarUrlAbsoluta ? 'http://localhost:3000' : '';
+        const response = await fetch(`${baseUrl}/api/books`);
         if (!response.ok) {
             throw new Error(`A resposta da API não foi OK: ${response.statusText}`);
         }

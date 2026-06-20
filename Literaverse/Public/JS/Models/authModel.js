@@ -49,6 +49,14 @@ const authNotifier = new AuthSubject();
 
 // --- SESSÃO E CONEXÃO COM O BACKEND API ---
 
+// Auxiliar para obter a URL correta do backend. Caso esteja rodando por um Live Server (porta 5500)
+// ou via arquivo local (file://), fazemos a requisição apontar para a porta do servidor Express (3000).
+const OBTER_API_URL = (endpoint) => {
+    const usarUrlAbsoluta = (window.location.port && window.location.port !== '3000') || window.location.protocol === 'file:';
+    const baseUrl = usarUrlAbsoluta ? 'http://localhost:3000' : '';
+    return `${baseUrl}${endpoint}`;
+};
+
 /**
  * Faz login real no servidor backend.
  * @param {string} email
@@ -57,7 +65,7 @@ const authNotifier = new AuthSubject();
  */
 async function simularLoginAPI(email, senha) {
     console.log(`[API] Tentando login para: ${email}`);
-    const response = await fetch('/api/auth/login', {
+    const response = await fetch(OBTER_API_URL('/api/auth/login'), {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -86,7 +94,7 @@ async function simularLoginAPI(email, senha) {
  */
 async function simularRegistroAPI(novoUsuario) {
     console.log(`[API] Tentando registrar: ${novoUsuario.email}`);
-    const response = await fetch('/api/auth/register', {
+    const response = await fetch(OBTER_API_URL('/api/auth/register'), {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -118,7 +126,7 @@ async function obterPerfilAPI() {
         throw new Error('Usuário não autenticado.');
     }
 
-    const response = await fetch('/api/users/profile', {
+    const response = await fetch(OBTER_API_URL('/api/users/profile'), {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`
@@ -144,7 +152,7 @@ async function atualizarPerfilAPI(dadosUsuario) {
         throw new Error('Usuário não autenticado.');
     }
 
-    const response = await fetch('/api/users/profile', {
+    const response = await fetch(OBTER_API_URL('/api/users/profile'), {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -174,7 +182,7 @@ async function excluirPerfilAPI() {
         throw new Error('Usuário não autenticado.');
     }
 
-    const response = await fetch('/api/users/profile', {
+    const response = await fetch(OBTER_API_URL('/api/users/profile'), {
         method: 'DELETE',
         headers: {
             'Authorization': `Bearer ${token}`

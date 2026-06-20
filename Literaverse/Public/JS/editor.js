@@ -225,7 +225,7 @@
     // restaurar autosave se houver
     window.addEventListener('load', () => {
         const saved = localStorage.getItem('autosave_obra');
-        if (saved && confirm('Restaurar rascunho automático?')) {
+        if (saved && editor && confirm('Restaurar rascunho automático?')) {
             editor.innerHTML = saved;
         }
         if (rascunhosPanel) rascunhosPanel.style.display = 'none';

@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "id": "user_1781970249129",
+    "nome": "Cainan",
+    "usuario": "cainanzz",
+    "email": "cainan07arruda@gmail.com",
+    "nascimento": "2007-01-22",
+    "senha": "44c20b72fd3046c5c29f0d8ba20697d8459efeef07e62fd6eb035072fd77607f",
+    "dataCadastro": "2026-06-20T15:44:09.129Z",
+    "foto": "https://placehold.co/150x150/5f3f71/F4E927?text=User"
+  }
+]

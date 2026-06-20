@@ -14,7 +14,7 @@ class UserFactory {
      */
     static createUser(nome, usuario, email, nascimento, hashedPassword) {
         return {
-            id: 'user_' + Date.now(),
+            id: 'user_' + Date.now() + '_' + Math.random().toString(36).substring(2, 11),
             nome: nome.trim(),
             usuario: usuario.trim(),
             email: email.toLowerCase().trim(),
