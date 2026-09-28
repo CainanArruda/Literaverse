@@ -1,0 +1,157 @@
+.pagina-dados {
+    padding-block: 2.5rem 4rem;
+}
+
+.dados-cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.dados-navegacao {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.dados-navegacao a {
+    color: var(--texto);
+    text-decoration: none;
+}
+
+.dados-navegacao a[aria-current="page"] {
+    color: var(--cor-secundaria);
+    font-weight: 700;
+}
+
+.dados-titulo {
+    margin: 0 0 1.5rem;
+}
+
+.dados-abas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    border-bottom: 1px solid var(--borda);
+}
+
+.dados-aba {
+    padding: .7rem 1rem;
+    color: var(--texto-secundario);
+    border: 0;
+    border-bottom: 3px solid transparent;
+    background: transparent;
+    font: inherit;
+    font-weight: 600;
+}
+
+.dados-aba[aria-pressed="true"] {
+    color: var(--texto);
+    border-bottom-color: var(--cor-secundaria);
+}
+
+.dados-aba:focus-visible,
+.dados-controle:focus-visible {
+    outline: 3px solid var(--cor-secundaria);
+    outline-offset: 2px;
+}
+
+.dados-toolbar,
+.dados-paginacao {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 1rem;
+}
+
+.dados-limite {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.dados-limite select {
+    min-height: 2.5rem;
+    padding: .35rem 2rem .35rem .6rem;
+    color: var(--texto);
+    border: 1px solid var(--borda);
+    border-radius: 4px;
+    background: var(--bg-secundario);
+}
+
+.dados-tabela-conteiner {
+    overflow-x: auto;
+    border-block: 1px solid var(--borda);
+}
+
+.dados-tabela {
+    width: 100%;
+    border-collapse: collapse;
+    color: var(--texto);
+    text-align: left;
+}
+
+.dados-tabela th,
+.dados-tabela td {
+    min-width: 7rem;
+    padding: .8rem .75rem;
+    border-bottom: 1px solid var(--borda);
+    vertical-align: top;
+}
+
+.dados-tabela th {
+    font-size: .85rem;
+    font-weight: 700;
+}
+
+.dados-tabela td:first-child {
+    font-variant-numeric: tabular-nums;
+}
+
+.dados-paginacao {
+    justify-content: flex-end;
+}
+
+.dados-intervalo {
+    margin-right: auto;
+    color: var(--texto-secundario);
+    font-variant-numeric: tabular-nums;
+}
+
+.dados-controle {
+    min-width: 2.75rem;
+    min-height: 2.5rem;
+    padding: .4rem .8rem;
+    color: var(--texto);
+    border: 1px solid var(--borda);
+    border-radius: 4px;
+    background: var(--bg-secundario);
+}
+
+.dados-controle:disabled {
+    cursor: not-allowed;
+    opacity: .5;
+}
+
+.dados-status {
+    min-height: 1.5rem;
+    color: var(--texto-secundario);
+}
+
+@media (max-width: 600px) {
+    .pagina-dados {
+        padding-top: 1.5rem;
+    }
+
+    .dados-cabecalho,
+    .dados-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .dados-paginacao {
+        flex-wrap: wrap;
+    }
+}

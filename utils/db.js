@@ -61,5 +61,11 @@ class DatabaseConnection {
     }
 }
 
-// Exporta a instância única (Singleton) diretamente para manter a compatibilidade
-module.exports = DatabaseConnection.getInstance();
+const { sql, getPool } = require('../database/connections');
+const instance = DatabaseConnection.getInstance();
+instance.sql = sql;
+instance.getPool = getPool;
+
+// Exporta a instância única (Singleton) com suporte tanto ao JSON legado quanto ao SQL Server
+module.exports = instance;
+

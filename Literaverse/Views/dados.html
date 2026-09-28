@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Literaverse - Recentes</title>
+    <link rel="stylesheet" href="../Public/css/base.css">
+    <link rel="stylesheet" href="../Public/css/layout.css">
+    <link rel="stylesheet" href="../Public/css/header.css">
+    <link rel="stylesheet" href="../Public/css/components.css">
+    <link rel="stylesheet" href="../Public/css/footer.css">
+    <link rel="stylesheet" href="../Public/css/responsive.css">
+    <link rel="stylesheet" href="../Public/css/dados.css">
+</head>
+<body class="tema-claro">
+    <header class="cabecalho navbar navbar-expand-lg sticky-top">
+        <div class="container dados-cabecalho">
+            <a class="navbar-brand logo" href="index.html">
+                <img src="../Public/Imagens/logo sem fundo.png" alt="Literaverse" class="logo-imagem">
+            </a>
+            <nav class="dados-navegacao" aria-label="Navegação principal">
+                <a href="biblioteca.html">Biblioteca</a>
+                <a href="dados.html" aria-current="page">Recentes</a>
+            </nav>
+            <button id="alternarTema" class="botao-tema" aria-label="Alternar tema">
+                <svg class="icone-sol" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                    <circle cx="12" cy="12" r="4" />
+                    <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41 1.41" />
+                </svg>
+                <svg class="icone-lua" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+                </svg>
+            </button>
+            <div id="acoes-usuario-auth-container" class="acoes-usuario d-flex align-items-center"></div>
+        </div>
+    </header>
+
+    <main class="container conteudo-principal pagina-dados">
+        <h1 class="titulo-pagina fonte-titulo dados-titulo">Recentes</h1>
+        <div class="dados-abas" role="group" aria-label="Conjunto de dados">
+            <button class="dados-aba" type="button" data-recurso="books" aria-pressed="true">Obras</button>
+            <button class="dados-aba" type="button" data-recurso="authors" aria-pressed="false">Autores</button>
+            <button class="dados-aba" type="button" data-recurso="users" aria-pressed="false">Usuários</button>
+        </div>
+
+        <div class="dados-toolbar">
+            <label class="dados-limite" for="dados-limite">
+                Registros por página
+                <select id="dados-limite">
+                    <option value="5">5</option>
+                    <option value="10" selected>10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                </select>
+            </label>
+            <p id="dados-status" class="dados-status" role="status" aria-live="polite"></p>
+        </div>
+
+        <div class="dados-tabela-conteiner">
+            <table id="dados-tabela" class="dados-tabela" aria-busy="true">
+                <thead><tr id="dados-cabecalho"></tr></thead>
+                <tbody id="dados-corpo"></tbody>
+            </table>
+        </div>
+        <nav class="dados-paginacao" aria-label="Paginação dos resultados">
+            <span id="dados-intervalo" class="dados-intervalo"></span>
+            <button id="dados-anterior" class="dados-controle" type="button" aria-label="Página anterior" disabled>Anterior</button>
+            <button id="dados-proximo" class="dados-controle" type="button" aria-label="Próxima página" disabled>Próxima</button>
+        </nav>
+    </main>
+
+    <script src="../Public/JS/Models/authModel.js"></script>
+    <script src="../Public/JS/Models/dadosModel.js"></script>
+    <script src="../Public/JS/Controllers/dadosController.js"></script>
+    <script src="../Public/JS/script.js"></script>
+</body>
+</html>

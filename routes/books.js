@@ -2,66 +2,63 @@ const express = require('express');
 const router = express.Router();
 const fs = require('fs');
 const path = require('path');
+const bookRepository = require('../repositories/bookRepository');
+const { parsePagination, paginatedResponse } = require('../utils/pagination');
 
 const FALLBACK_PATH = path.join(__dirname, '..', 'database', 'books_fallback.json');
 
 let booksCache = null;
-let lastFetchTime = 0;
-const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 horas de cache no servidor
 
-// Carrega os livros do arquivo fallback local como valor inicial instantâneo no startup
 try {
     const fallbackData = fs.readFileSync(FALLBACK_PATH, 'utf-8');
     booksCache = JSON.parse(fallbackData);
-    console.log("[Server Cache] Fallback local carregado com sucesso como cache inicial.");
 } catch (err) {
-    console.error("[Server Cache] Erro ao carregar fallback local de livros:", err.message);
+    console.error('[Server Cache] Erro ao carregar fallback local de livros:', err.message);
 }
 
-// Função para buscar livros da API externa Gutendex e atualizar o cache do servidor
-async function fetchAndCacheBooks() {
-    try {
-        console.log("[Server Cache] Buscando livros atualizados da API externa Gutendex...");
-        
-        // Define um tempo limite (timeout) de 25 segundos para dar tempo suficiente para a API Gutendex lenta
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 25000);
-        
-        const response = await fetch('https://gutendex.com/books/?search=machado%20de%20assis', {
-            signal: controller.signal
-        });
-        clearTimeout(timeoutId);
-
-        if (!response.ok) {
-            throw new Error(`Resposta da API Gutendex não foi OK: ${response.status}`);
-        }
-        const data = await response.json();
-        booksCache = data;
-        lastFetchTime = Date.now();
-        console.log("[Server Cache] Cache de livros atualizado com dados frescos do Gutendex.");
-    } catch (err) {
-        console.warn("[Server Cache] Não foi possível obter novos dados da API externa (usando cache anterior/fallback):", err.message);
-    }
-}
-
-// Dispara a busca atualizada em segundo plano no startup
-fetchAndCacheBooks();
-
-// Rota RESTful para obter livros (com proxy e cache em memória)
+// Rota GET /api/books com paginação conectada ao SQL Server
 router.get('/', async (req, res) => {
-    const now = Date.now();
-
-    // Se o cache expirou, atualiza em background
-    if (now - lastFetchTime > CACHE_DURATION) {
-        console.log("[API Books] Cache expirado ou necessitando verificação. Atualizando em background...");
-        fetchAndCacheBooks();
+    const page = parsePagination(req.query);
+    if (page.error) {
+        return res.status(400).json({ message: page.error });
     }
 
-    if (booksCache) {
-        res.setHeader('X-Cache', 'HIT');
-        return res.json(booksCache);
-    } else {
-        return res.status(502).json({ message: 'Erro ao obter livros da API.' });
+    try {
+        const result = await bookRepository.findPage(page.offset, page.limit);
+        return res.json(paginatedResponse(result, page.offset, page.limit));
+    } catch (err) {
+        console.warn('[API Books] SQL Server indisponível ou erro na consulta, usando fallback:', err.message);
+
+        // Fallback resiliente usando cache/arquivo local
+        if (booksCache && Array.isArray(booksCache.results)) {
+            const rawItems = booksCache.results;
+            const sliced = rawItems.slice(page.offset, page.offset + page.limit).map((b) => ({
+                id: b.id,
+                titulo: b.title,
+                autor: (b.authors || []).map((a) => a.name).join(', ') || 'Autor desconhecido',
+                descricao: 'Clássico da literatura',
+                faixaEtaria: 14,
+                imagem: b.formats ? b.formats['image/jpeg'] : null
+            }));
+
+            return res.json(paginatedResponse({ items: sliced, total: rawItems.length }, page.offset, page.limit));
+        }
+
+        return res.status(500).json({ message: 'Erro ao obter livros do banco de dados.' });
+    }
+});
+
+// Rota GET /api/books/:id para detalhes de uma obra
+router.get('/:id', async (req, res) => {
+    try {
+        const book = await bookRepository.findById(req.params.id);
+        if (!book) {
+            return res.status(404).json({ message: 'Obra não encontrada.' });
+        }
+        return res.json(book);
+    } catch (err) {
+        console.error('[API Books] Erro ao consultar obra:', err.message);
+        return res.status(500).json({ message: 'Erro ao obter obra do banco de dados.' });
     }
 });
 

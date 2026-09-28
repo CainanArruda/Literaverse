@@ -8,5 +8,105 @@
     "senha": "44c20b72fd3046c5c29f0d8ba20697d8459efeef07e62fd6eb035072fd77607f",
     "dataCadastro": "2026-06-20T15:44:09.129Z",
     "foto": "https://placehold.co/150x150/5f3f71/F4E927?text=User"
+  },
+  {
+    "id": "user_1790534511186_4viz4qsd3",
+    "nome": "Usuario Teste QSS",
+    "usuario": "qss_user_1790534511001",
+    "email": "qss_1790534511001@literaverse.com",
+    "nascimento": "2001-01-01",
+    "senha": "54dee77811789833a9ad12ccc454a0aace7570c154c12dbdc61dbb1623c9c4e1",
+    "dataCadastro": "2026-09-27T18:41:51.186Z",
+    "foto": "https://placehold.co/150x150/5f3f71/F4E927?text=User"
+  },
+  {
+    "id": "user_1790534561872_gra78c6uv",
+    "nome": "Usuario Teste QSS",
+    "usuario": "qss_user_1790534561849",
+    "email": "qss_1790534561849@literaverse.com",
+    "nascimento": "2001-01-01",
+    "senha": "54dee77811789833a9ad12ccc454a0aace7570c154c12dbdc61dbb1623c9c4e1",
+    "dataCadastro": "2026-09-27T18:42:41.872Z",
+    "foto": "https://placehold.co/150x150/5f3f71/F4E927?text=User"
+  },
+  {
+    "id": "user_1790534571890_tfl5poq1m",
+    "nome": "Usuario Teste QSS",
+    "usuario": "qss_user_1790534571859",
+    "email": "qss_1790534571859@literaverse.com",
+    "nascimento": "2001-01-01",
+    "senha": "54dee77811789833a9ad12ccc454a0aace7570c154c12dbdc61dbb1623c9c4e1",
+    "dataCadastro": "2026-09-27T18:42:51.890Z",
+    "foto": "https://placehold.co/150x150/5f3f71/F4E927?text=User"
+  },
+  {
+    "id": "user_1790534643519_jwrqtuton",
+    "nome": "Usuario Teste QSS",
+    "usuario": "qss_user_1790534643494",
+    "email": "qss_1790534643494@literaverse.com",
+    "nascimento": "2001-01-01",
+    "senha": "54dee77811789833a9ad12ccc454a0aace7570c154c12dbdc61dbb1623c9c4e1",
+    "dataCadastro": "2026-09-27T18:44:03.519Z",
+    "foto": "https://placehold.co/150x150/5f3f71/F4E927?text=User"
+  },
+  {
+    "id": "user_1790535439167_bvjs09gnn",
+    "nome": "Usuario Teste QSS",
+    "usuario": "qss_user_1790535439133",
+    "email": "qss_1790535439133@literaverse.com",
+    "nascimento": "2001-01-01",
+    "senha": "54dee77811789833a9ad12ccc454a0aace7570c154c12dbdc61dbb1623c9c4e1",
+    "dataCadastro": "2026-09-27T18:57:19.167Z",
+    "foto": "https://placehold.co/150x150/5f3f71/F4E927?text=User"
+  },
+  {
+    "id": "user_1790535504029_un86963up",
+    "nome": "Usuario Teste QSS",
+    "usuario": "qss_user_1790535503997",
+    "email": "qss_1790535503997@literaverse.com",
+    "nascimento": "2001-01-01",
+    "senha": "54dee77811789833a9ad12ccc454a0aace7570c154c12dbdc61dbb1623c9c4e1",
+    "dataCadastro": "2026-09-27T18:58:24.029Z",
+    "foto": "https://placehold.co/150x150/5f3f71/F4E927?text=User"
+  },
+  {
+    "id": "user_1790536019670_kaevn0m77",
+    "nome": "Usuario Teste QSS",
+    "usuario": "qss_user_1790536019647",
+    "email": "qss_1790536019647@literaverse.com",
+    "nascimento": "2001-01-01",
+    "senha": "54dee77811789833a9ad12ccc454a0aace7570c154c12dbdc61dbb1623c9c4e1",
+    "dataCadastro": "2026-09-27T19:06:59.670Z",
+    "foto": "https://placehold.co/150x150/5f3f71/F4E927?text=User"
+  },
+  {
+    "id": "user_1790555696610_378vvhlvr",
+    "nome": "Usuario Teste QSS",
+    "usuario": "qss_user_1790555696511",
+    "email": "qss_1790555696511@literaverse.com",
+    "nascimento": "2001-01-01",
+    "senha": "54dee77811789833a9ad12ccc454a0aace7570c154c12dbdc61dbb1623c9c4e1",
+    "dataCadastro": "2026-09-28T00:34:56.610Z",
+    "foto": "https://placehold.co/150x150/5f3f71/F4E927?text=User"
+  },
+  {
+    "id": "user_1790555918289_guz36mcml",
+    "nome": "Usuario Teste QSS",
+    "usuario": "qss_user_1790555918264",
+    "email": "qss_1790555918264@literaverse.com",
+    "nascimento": "2001-01-01",
+    "senha": "54dee77811789833a9ad12ccc454a0aace7570c154c12dbdc61dbb1623c9c4e1",
+    "dataCadastro": "2026-09-28T00:38:38.289Z",
+    "foto": "https://placehold.co/150x150/5f3f71/F4E927?text=User"
+  },
+  {
+    "id": "user_1790555934979_bvqvbpbbx",
+    "nome": "Usuario Teste QSS",
+    "usuario": "qss_user_1790555934956",
+    "email": "qss_1790555934956@literaverse.com",
+    "nascimento": "2001-01-01",
+    "senha": "54dee77811789833a9ad12ccc454a0aace7570c154c12dbdc61dbb1623c9c4e1",
+    "dataCadastro": "2026-09-28T00:38:54.979Z",
+    "foto": "https://placehold.co/150x150/5f3f71/F4E927?text=User"
   }
 ]

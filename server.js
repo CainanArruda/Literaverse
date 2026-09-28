@@ -23,11 +23,13 @@ app.get('/', (req, res) => {
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/users');
 const booksRoutes = require('./routes/books');
+const authorsRoutes = require('./routes/authors');
 
 // Registrar rotas da API
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/books', booksRoutes);
+app.use('/api/authors', authorsRoutes);
 
 // Tratamento de erros genérico
 app.use((err, req, res, next) => {
