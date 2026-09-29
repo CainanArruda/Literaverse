@@ -16,7 +16,6 @@ try {
     console.error('[Server Cache] Erro ao carregar fallback local de livros:', err.message);
 }
 
-// Rota GET /api/books com paginação conectada ao SQL Server
 router.get('/', async (req, res) => {
     const page = parsePagination(req.query);
     if (page.error) {
@@ -29,7 +28,6 @@ router.get('/', async (req, res) => {
     } catch (err) {
         console.warn('[API Books] SQL Server indisponível ou erro na consulta, usando fallback:', err.message);
 
-        // Fallback resiliente usando cache/arquivo local
         if (booksCache && Array.isArray(booksCache.results)) {
             const rawItems = booksCache.results;
             const sliced = rawItems.slice(page.offset, page.offset + page.limit).map((b) => ({
@@ -48,7 +46,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Rota GET /api/books/:id para detalhes de uma obra
 router.get('/:id', async (req, res) => {
     try {
         const book = await bookRepository.findById(req.params.id);

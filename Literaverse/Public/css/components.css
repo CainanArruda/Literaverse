@@ -1,6 +1,3 @@
-/* Componentes e utilitários (botões, formulários, helpers) */
-
-/* Ações do usuário */
 .acoes-usuario {
     display: flex;
     align-items: center;
@@ -14,7 +11,6 @@
     transition: color 0.3s ease, transform 0.2s ease;
 }
 
-/* Efeito Hover para o botão de texto (Login) */
 .botao-login:hover {
     color: var(--cor-amarela-contraste);
     transform: translateY(-1px);
@@ -38,7 +34,6 @@ body.tema-escuro .botao-login:hover {
     cursor: pointer;
 }
 
-/* Efeito Hover para botões de destaque */
 .botao-cadastro:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 16px -3px hsla(var(--h-roxo), 50%, 40%, 0.45);
@@ -49,7 +44,6 @@ body.tema-escuro .botao-login:hover {
     transform: translateY(0);
 }
 
-/* Botão de tema */
 .botao-tema {
     position: relative;
     width: 36px;
@@ -109,7 +103,6 @@ body.tema-escuro .icone-lua {
     transform: scale(1) rotate(0);
 }
 
-/* Acessibilidade */
 .oculto {
     display: none;
 }
@@ -126,7 +119,6 @@ body.tema-escuro .icone-lua {
     border: 0;
 }
 
-/* Formulários Gerais */
 .registration-form {
     max-width: 580px;
     margin: 0 auto;
@@ -167,7 +159,6 @@ body.tema-escuro .form-input {
     color: var(--placeholder);
 }
 
-/* Estilização dos Select de Filtro */
 .campo-filtro {
     appearance: none !important;
     -webkit-appearance: none !important;
@@ -204,7 +195,6 @@ body.tema-escuro .form-input {
     box-shadow: 0 0 0 3px hsla(var(--h-roxo), 60%, 50%, 0.15);
 }
 
-/* Teste pra uma nova versão */ 
 .select {
     margin-right: 60px;
 }
@@ -257,12 +247,12 @@ body.tema-escuro .form-input {
     color: #FFD700;
 }
 
-#options-view-button:checked + #select-button #chevrons 
+#options-view-button:checked + #select-button #chevrons
 [data-type="chevron-down"] {
     display: none;
 }
 
-#options-view-button:checked + #select-button #chevrons 
+#options-view-button:checked + #select-button #chevrons
 [data-type="chevron-up"] {
     display: block;
 }
@@ -297,7 +287,6 @@ body.tema-escuro .form-input {
   border-bottom: 1px solid #252529;
 }
 
-
 .options label {
   color: #FBF9FE;
 }
@@ -330,8 +319,6 @@ body.tema-escuro .form-input {
   display: block;
 }
 
-
-/* Tema escuro */
 body.tema-escuro .campo-filtro {
     background-color: var(--input-bg-dark);
     border-color: var(--input-border-dark);
@@ -359,7 +346,6 @@ body.tema-escuro .campo-filtro:hover {
     color: var(--texto);
 }
 
-/* Continuação Formulários (Senha) */
 .campo-senha-container {
     position: relative;
     display: flex;
@@ -411,7 +397,6 @@ body.tema-escuro .botao-mostrar-senha:hover {
     display: block;
 }
 
-/* Inputs por tema */
 body.tema-claro .form-input {
     background: var(--input-bg-light);
     border: 1px solid var(--input-border-light);
@@ -424,14 +409,12 @@ body.tema-escuro .form-input {
     color: var(--texto-claro);
 }
 
-/* Foco */
 .form-input:focus {
     outline: none;
     box-shadow: 0 0 0 4px rgba(107, 33, 168, 0.08);
     border-color: var(--cor-destaque);
 }
 
-/* Autofill */
 input.form-input:-webkit-autofill,
 textarea.form-input:-webkit-autofill,
 select.form-input:-webkit-autofill {
@@ -448,7 +431,6 @@ body.tema-escuro select.form-input:-webkit-autofill {
     -webkit-text-fill-color: var(--texto-claro);
 }
 
-/* Links e utilitários */
 .link-destaque {
     color: var(--cor-secundaria);
     text-decoration: underline;
@@ -466,12 +448,10 @@ body.tema-escuro select.form-input:-webkit-autofill {
     text-decoration: none;
 }
 
-/* pequenos utilitarios */
 .oculto {
     display: none;
 }
 
-/* Modal */
 .Modal {
     padding: 0 130px 0 130px;
     margin: auto;

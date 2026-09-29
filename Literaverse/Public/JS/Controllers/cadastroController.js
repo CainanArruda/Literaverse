@@ -1,9 +1,7 @@
-        // --- Lógica da Página de Cadastro (cadastro.html) ---
     const formCadastro = document.getElementById('formulario-cadastro');
     if (formCadastro) {
         console.log("Página de cadastro detectada.");
-        
-        // (Função validarSenha do script.js original)
+
         function validarSenha(valor) {
            const erros = [];
             if (!valor || valor.length < 8) {
@@ -14,7 +12,7 @@
             if (!/\d/.test(valor)) erros.push('Inclua pelo menos um número.');
             if (!/[!@#\$%\^&\*()_+\-=\[\]{};':"\\|,.<>\/?`~]/.test(valor)) erros.push('Inclua pelo menos um caractere especial.');
             if (/(.)\1\1/.test(valor)) erros.push('Não use o mesmo caractere repetido 3 vezes seguidas.');
-            
+
             function temSequencia(s) {
                 const seqLen = 3;
                 for (let i = 0; i <= s.length - seqLen; i++) {
@@ -69,7 +67,7 @@
                 console.warn("Validação do formulário falhou.");
                 return;
             }
-            
+
             const novoUsuario = {
                 nome: nome.value.trim(),
                 usuario: usuarioEl.value.trim(),
@@ -81,18 +79,16 @@
             const botao = document.getElementById('botao-enviar');
             if (botao) { botao.disabled = true; botao.textContent = 'Criando conta...'; }
 
-            // Usando a simulação de API 
             simularRegistroAPI(novoUsuario)
                 .then(sessaoUsuario => {
-                    // Sucesso no registro
+
                     console.log("Registro bem-sucedido, salvando sessão...");
                     salvarSessao(sessaoUsuario);
-                    
-                    // Redireciona para o perfil
+
                     window.location.href = 'usuario.html';
                 })
                 .catch(erro => {
-                    // Falha no registro (ex: email duplicado)
+
                     console.error("Falha no registro:", erro.message);
                     if (erro.message.includes('email')) {
                         document.getElementById('erro-email').textContent = erro.message;

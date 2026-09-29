@@ -1,7 +1,6 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Poppins:wght@400;500;600&display=swap');
 
-/* Variáveis de tema */
 :root {
   --cor-primaria: #7b66d1;
   --cor-secundaria: #F4E927;
@@ -14,34 +13,7 @@
   --texto-claro: #FFFFFF;
   --texto-escuro: #111827;
   --texto-secundario-claro: rgba(255, 255, 255, 0.8);
-  /* Arquivo legado: o CSS foi fragmentado em módulos dentro de CSS/*. */
-  /* Para manutenção, veja os arquivos:
-     - CSS/base.css        (variáveis, reset, background)
-     - CSS/header.css      (cabecalho, nav, busca)
-     - CSS/layout.css      (herói, seções, containers)
-     - CSS/components.css  (botões, formulários, utilitários)
-     - CSS/cards.css       (cards, grids, detalhe-livro)
-     - CSS/perfil.css      (estilos de usuario/perfil)
-     - CSS/footer.css      (rodapé)
-     - CSS/responsive.css  (mídia queries / responsividade)
 
-     Este arquivo foi mantido apenas por compatibilidade; os HTMLs foram atualizados
-     para importar os módulos diretamente. Se preferir, remova este arquivo.
-  */
-
-  /* Para compatibilidade retroativa, você pode importar os módulos a partir daqui,
-     descomente as linhas abaixo se quiser manter um único ponto de inclusão.
-  height: 40px;
-  /*
-  @import url('base.css');
-  @import url('header.css');
-  @import url('layout.css');
-  @import url('components.css');
-  @import url('cards.css');
-  @import url('perfil.css');
-  @import url('footer.css');
-  @import url('responsive.css');
-  */
   object-fit: contain
 }
 
@@ -50,7 +22,6 @@
   font-size: 1.15rem
 }
 
-/* Navegação */
 .nav-principal {
   display: flex;
   align-items: center;
@@ -75,7 +46,6 @@
   color: var(--cor-terciaria)
 }
 
-/* Busca */
 .form-busca {
   position: relative;
   display: flex;
@@ -104,7 +74,6 @@
   pointer-events: none
 }
 
-/* Ações do usuário */
 .acoes-usuario {
   display: flex;
   align-items: center;
@@ -126,7 +95,6 @@
   font-weight: 700
 }
 
-/* Botão de tema */
 .botao-tema {
     position: relative;
     width: 36px;
@@ -150,7 +118,7 @@
     stroke-width: 2;
     stroke-linecap: round;
     stroke-linejoin: round;
-    transition: transform .15s, opacity .15s 
+    transition: transform .15s, opacity .15s
 }
 
 .icone-sol {
@@ -177,8 +145,6 @@ body.tema-escuro .icone-lua {
     transform: scale(1);
 }
 
-
-/* Acessibilidade */
 .oculto {
   display: none
 }
@@ -195,7 +161,6 @@ body.tema-escuro .icone-lua {
   border: 0
 }
 
-/* Herói */
 .secao-heroi {
   display: flex;
   flex-direction: column;
@@ -226,7 +191,6 @@ body.tema-escuro .icone-lua {
   margin-top: 1rem
 }
 
-/* Herói: cores por tema */
 body.tema-claro .titulo-heroi {
   color: var(--texto-escuro)
 }
@@ -258,7 +222,6 @@ body.tema-escuro .subtitulo-heroi {
   margin-top: 1.5rem
 }
 
-/* Cabeçalho: temas */
 body.tema-claro .cabecalho {
   background: rgba(251, 251, 253, 0.88);
   -webkit-backdrop-filter: blur(6px);
@@ -267,8 +230,6 @@ body.tema-claro .cabecalho {
   border-bottom: 1px solid var(--borda)
 }
 
-/* Cabeçalho sólido em modo escuro */
-/* Cabeçalho semi-transparente em modo escuro */
 body.tema-escuro .cabecalho {
   background: rgba(7, 16, 36, 0.6);
   -webkit-backdrop-filter: blur(6px);
@@ -276,7 +237,6 @@ body.tema-escuro .cabecalho {
   color: var(--texto-claro)
 }
 
-/* Cartões */
 .cartao-livro {
   background: var(--superficie-clara);
   border-radius: 12px;
@@ -354,7 +314,6 @@ body.tema-escuro .cartao-livro .info-livro {
   padding-top: 0.5rem;
 }
 
-/* Estilos para a seção de herói */
 .secao-heroi {
     background: linear-gradient(180deg, rgba(123, 102, 209, 0.1) 0%, rgba(232, 216, 252, 0.05) 100%);
     padding: 4rem 0;
@@ -387,7 +346,6 @@ body.tema-escuro .cartao-livro .info-livro {
     background-color: var(--cor-destaque);
 }
 
-/* Estilos para a seção de destaque */
 .secao-destaque {
     padding: 4rem 0;
 }
@@ -422,7 +380,6 @@ body.tema-escuro .cartao-livro .info-livro {
   object-fit: cover
 }
 
-/* Rodapé */
 .rodape {
   background: transparent;
   padding: 3.5rem 0;
@@ -498,7 +455,6 @@ body.tema-escuro .cartao-livro .info-livro {
   transition: filter .15s ease, opacity .15s;
 }
 
-/* Ícones de redes */
 body.tema-claro .icone-rede {
   filter: invert(1)
 }
@@ -507,7 +463,6 @@ body.tema-escuro .icone-rede {
   filter: none
 }
 
-/* Rodapé: alinhamento */
 .rodape .container {
   padding-top: 0;
   display: flex;
@@ -537,7 +492,6 @@ body.tema-escuro .icone-rede {
   padding: 0 1rem;
 }
 
-/* Botão destaque */
 .botao-cadastro {
   background: var(--cor-secundaria);
   color: var(--texto-escuro);
@@ -548,7 +502,6 @@ body.tema-escuro .icone-rede {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08)
 }
 
-/* Formulários */
 .registration-form {
   max-width: 640px;
   margin: 0 auto;
@@ -556,14 +509,12 @@ body.tema-escuro .icone-rede {
   border-radius: 10px
 }
 
-/* Cadastro: título */
 .pagina-cadastro .titulo-pagina {
   text-align: center;
   margin: 1.25rem 0 1rem;
   font-size: 1.75rem
 }
 
-/* Campos de formulário */
 .form-input {
   width: 100%;
   padding: .75rem .9rem;
@@ -578,7 +529,6 @@ body.tema-escuro .icone-rede {
   color: var(--placeholder)
 }
 
-/* Container para campos de senha com botão de mostrar/ocultar */
 .campo-senha-container {
   position: relative;
   display: flex;
@@ -630,7 +580,6 @@ body.tema-escuro .botao-mostrar-senha:hover {
   display: block
 }
 
-/* Inputs por tema */
 body.tema-claro .form-input {
   background: var(--input-bg-light);
   border: 1px solid var(--input-border-light);
@@ -643,20 +592,17 @@ body.tema-escuro .form-input {
   color: var(--texto-claro)
 }
 
-/* Container transparente */
 body.tema-claro .registration-form,
 body.tema-escuro .registration-form {
   background: transparent
 }
 
-/* Foco */
 .form-input:focus {
   outline: none;
   box-shadow: 0 0 0 4px rgba(107, 33, 168, 0.08);
   border-color: var(--cor-destaque)
 }
 
-/* Autofill */
 input.form-input:-webkit-autofill,
 textarea.form-input:-webkit-autofill,
 select.form-input:-webkit-autofill {
@@ -673,14 +619,12 @@ body.tema-escuro select.form-input:-webkit-autofill {
   -webkit-text-fill-color: var(--texto-claro)
 }
 
-/* Foco */
 .form-input:focus {
   outline: none;
   box-shadow: 0 0 0 4px rgba(107, 33, 168, 0.08);
   border-color: var(--cor-destaque)
 }
 
-/* Links e utilitários */
 .link-destaque {
   color: var(--cor-terciaria);
   text-decoration: underline
@@ -702,7 +646,6 @@ body.tema-escuro select.form-input:-webkit-autofill {
   color: var(--texto-secundario-claro)
 }
 
-/* Grades */
 .grade-livros,
 .grid-livros {
   display: grid;
@@ -710,14 +653,12 @@ body.tema-escuro select.form-input:-webkit-autofill {
   gap: 1.5rem
 }
 
-/* Rodapé (tema escuro) */
 body.tema-escuro .rodape,
 body.tema-escuro .rodape p,
 body.tema-escuro .rodape a {
   color: var(--texto-secundario-claro);
 }
 
-/* Componentes */
 input,
 select,
 textarea {
@@ -751,7 +692,6 @@ textarea {
   min-height: 1rem
 }
 
-/* Perfil */
 .perfil-container {
   display: grid;
   grid-template-columns: 1fr;
@@ -768,7 +708,6 @@ textarea {
   }
 }
 
-/* Sidebar do perfil */
 .perfil-sidebar {
   background: var(--superficie-clara);
   border-radius: 12px;
@@ -847,7 +786,6 @@ body.tema-escuro .perfil-sidebar {
   color: var(--texto-secundario-escuro);
 }
 
-/* Conteúdo principal */
 .perfil-conteudo {
   display: flex;
   flex-direction: column;
@@ -888,7 +826,6 @@ body.tema-escuro .botao-ver-todos:hover {
   background-color: var(--input-bg-dark);
 }
 
-/* Grid de obras e leituras */
 .grid-obras,
 .grid-leituras,
 .grid-favoritos {
@@ -940,7 +877,6 @@ body.tema-escuro .cartao-obra {
   margin-top: auto;
 }
 
-/* Responsividade */
 @media (max-width: 1200px) {
 
   .grid-obras,
@@ -997,7 +933,6 @@ body.tema-escuro .cartao-obra {
   }
 }
 
-/* Utilitários */
 .oculto {
   display: none
 }
@@ -1022,7 +957,6 @@ body.tema-escuro .cartao-obra {
   }
 }
 
-/* Detalhe de livro */
 .detalhe-livro .detalhe-grid {
   display: grid;
   grid-template-columns: 300px 1fr;
@@ -1108,12 +1042,6 @@ body.tema-escuro .botao-acao {
   }
 }
 
-/* ===================== */
-/*  Ajustes Responsivos  */
-/* ===================== */
-/* Mantidos separados ao final para fácil manutenção */
-
-/* Tipografia fluida para títulos grandes em telas muito estreitas */
 @media (max-width:600px) {
   .titulo-heroi {
     font-size: clamp(1.9rem, 6vw, 2.3rem);
@@ -1131,7 +1059,6 @@ body.tema-escuro .botao-acao {
   }
 }
 
-/* Reduzir espaçamentos verticais em telas menores para diminuir scroll inicial */
 @media (max-width:600px) {
   .secao-heroi {
     padding: 3rem 0 2.5rem
@@ -1147,7 +1074,6 @@ body.tema-escuro .botao-acao {
   }
 }
 
-/* Header: garantir que elementos não “estourem” em telas muito estreitas */
 @media (max-width:520px) {
   .cabecalho-grid {
     gap: .6rem
@@ -1177,10 +1103,8 @@ body.tema-escuro .botao-acao {
     display: none
   }
 
-  /* some só o botão grande; CTA já aparece no herói */
 }
 
-/* Grade de livros: ajustes responsivos */
 .grid-livros {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -1211,7 +1135,6 @@ body.tema-escuro .botao-acao {
   }
 }
 
-/* Ajustes para o formulário de cadastro em telas pequenas */
 @media (max-width:500px) {
   .registration-form {
     padding: 1rem .75rem
@@ -1226,7 +1149,6 @@ body.tema-escuro .botao-acao {
   }
 }
 
-/* Perfil: alinhar melhor quando muito estreito */
 @media (max-width:480px) {
   .profile-section {
     gap: 1.5rem
@@ -1238,7 +1160,6 @@ body.tema-escuro .botao-acao {
   }
 }
 
-/* Detalhe do livro: reduzir padding lateral geral quando menor */
 @media (max-width:540px) {
   .detalhe-livro .detalhe-grid {
     padding: 2rem 0 1.25rem
@@ -1249,14 +1170,12 @@ body.tema-escuro .botao-acao {
   }
 }
 
-/* Melhorar legibilidade de parágrafos em telas largas sem afetar layout */
 @media (min-width:1200px) {
   .subtitulo-heroi {
     font-size: 1.15rem
   }
 }
 
-/* Suavizar altura mínima do container do herói em telas baixas (landscape mobile) */
 @media (max-height:600px) and (orientation:landscape) {
   .secao-heroi .container {
     min-height: 260px;
@@ -1265,7 +1184,6 @@ body.tema-escuro .botao-acao {
   }
 }
 
-/* Preferência do usuário por redução de movimento: retirar transform hover forte */
 @media (prefers-reduced-motion:reduce) {
   .cartao-livro:hover {
     transform: none
@@ -1276,7 +1194,6 @@ body.tema-escuro .botao-acao {
   }
 }
 
-/* Estilos da Biblioteca */
 .barra-filtros {
   margin: 2rem 0;
   padding: 1.25rem;
@@ -1324,10 +1241,6 @@ body.tema-escuro .campo-filtro {
   border-color: var(--input-border-dark);
 }
 
-/* ===================== */
-/*  Menu Mobile          */
-/* ===================== */
-/* Botão hambúrguer oculto em desktop - Design 3 pontos */
 .botao-menu {
   display: none;
   position: relative;
@@ -1364,7 +1277,6 @@ body.tema-escuro .botao-menu {
   color: var(--texto-claro)
 }
 
-/* Estado aberto (classe adicionada via JS) - Transforma em X */
 .botao-menu.ativo .barra:nth-child(1) {
   transform: translateY(8px) rotate(45deg);
   width: 16px;
@@ -1383,13 +1295,11 @@ body.tema-escuro .botao-menu {
   border-radius: 1px
 }
 
-/* Container de navegação colapsável no mobile */
 @media (max-width:820px) {
   .botao-menu {
     display: flex
   }
 
-  /* Mantém header visível; painel deriva da nav mas não cobre tudo inicialmente */
   .nav-principal {
     position: absolute;
     top: 100%;
@@ -1444,12 +1354,10 @@ body.tema-escuro .botao-menu {
     width: 100%
   }
 
-  /* Forçar nav original horizontal a desaparecer dentro do painel */
   .cabecalho-grid {
     position: relative
   }
 
-  /* Evitar sumir a lista-nav pelo media anterior */
   @media(max-width:768px) {
     .lista-nav {
       display: flex
@@ -1457,7 +1365,6 @@ body.tema-escuro .botao-menu {
   }
 }
 
-/* Ajuste para header manter alinhamento quando menu ativo (evitar shift) */
 body.menu-aberto {
   overflow: hidden
 }

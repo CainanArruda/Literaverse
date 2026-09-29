@@ -10,7 +10,6 @@ function hashPassword(password) {
     return crypto.createHash('sha256').update(password).digest('hex');
 }
 
-// Rota GET /api/users - Listagem pública paginada de leitores/usuários
 router.get('/', async (req, res) => {
     const page = parsePagination(req.query);
     if (page.error) {
@@ -37,10 +36,9 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Obter Perfil do Usuário Autenticado
 router.get('/profile', authMiddleware, async (req, res) => {
     try {
-        // Tenta obter do SQL Server primeiro
+
         try {
             const sqlUser = await userRepository.findById(req.user.id);
             if (sqlUser) {
@@ -51,7 +49,6 @@ router.get('/profile', authMiddleware, async (req, res) => {
             console.warn('[API Users] Falha ao consultar perfil no SQL Server, tentando fallback JSON:', sqlErr.message);
         }
 
-        // Fallback para users.json
         const users = readUsers();
         const user = users.find((u) => u.id === req.user.id);
 
@@ -67,7 +64,6 @@ router.get('/profile', authMiddleware, async (req, res) => {
     }
 });
 
-// Atualizar Perfil do Usuário Autenticado (UPDATE no SQL Server e sincronização no JSON)
 router.put('/profile', authMiddleware, async (req, res) => {
     try {
         const { nome, nascimento, senha } = req.body;
@@ -81,14 +77,12 @@ router.put('/profile', authMiddleware, async (req, res) => {
 
         let updatedUser = null;
 
-        // Atualização no SQL Server
         try {
             updatedUser = await userRepository.update(req.user.id, updates);
         } catch (sqlErr) {
             console.warn('[API Users] Aviso ao atualizar usuário no SQL Server:', sqlErr.message);
         }
 
-        // Sincronização no users.json
         try {
             const users = readUsers();
             const userIndex = users.findIndex((u) => u.id === req.user.id);
@@ -129,12 +123,10 @@ router.put('/profile', authMiddleware, async (req, res) => {
     }
 });
 
-// Excluir Conta do Usuário Autenticado (DELETE no SQL Server e no JSON)
 router.delete('/profile', authMiddleware, async (req, res) => {
     try {
         let deletedFromSql = false;
 
-        // Exclusão no SQL Server
         try {
             await userRepository.remove(req.user.id);
             deletedFromSql = true;
@@ -142,7 +134,6 @@ router.delete('/profile', authMiddleware, async (req, res) => {
             console.warn('[API Users] Aviso ao excluir usuário do SQL Server:', sqlErr.message);
         }
 
-        // Exclusão no users.json
         const users = readUsers();
         const userIndex = users.findIndex((u) => u.id === req.user.id);
 

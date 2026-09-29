@@ -101,7 +101,7 @@ test('API Backend - Fluxo de Autenticação (Registro e Login)', async () => {
     };
 
     try {
-        // 1. Registro
+
         const regRes = await fetch(`http://localhost:${port}/api/auth/register`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -112,7 +112,6 @@ test('API Backend - Fluxo de Autenticação (Registro e Login)', async () => {
         assert.ok(regData.token, 'Deve retornar token JWT no cadastro');
         assert.strictEqual(regData.user.email, testUser.email);
 
-        // 2. Login
         const loginRes = await fetch(`http://localhost:${port}/api/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

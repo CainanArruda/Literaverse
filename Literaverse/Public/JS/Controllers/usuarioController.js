@@ -1,7 +1,3 @@
-/**
- * Carrega as informações reais do perfil do usuário a partir do backend.
- * @param {object} sessao
- */
 async function carregarDadosUsuario(sessao) {
     console.log("Carregando dados do usuário na página de perfil...");
     const nomeEl = document.getElementById('perfil-nome-usuario');
@@ -9,35 +5,31 @@ async function carregarDadosUsuario(sessao) {
     const fotoEl = document.getElementById('perfil-avatar');
 
     try {
-        // Busca os dados atualizados diretamente do servidor
+
         const usuarioCompleto = await obterPerfilAPI();
 
-        // Preenche o Nome na página
         if (nomeEl) {
             nomeEl.textContent = usuarioCompleto.nome || usuarioCompleto.usuario;
         }
 
-        // Preenche a Foto de Perfil
         if (fotoEl && usuarioCompleto.foto) {
             fotoEl.src = usuarioCompleto.foto;
         }
 
-        // Preenche a data de cadastro e biografia
         if (bioEl) {
-            const data = new Date(usuarioCompleto.dataCadastro).toLocaleDateString('pt-BR', { 
-                month: 'long', 
-                year: 'numeric' 
+            const data = new Date(usuarioCompleto.dataCadastro).toLocaleDateString('pt-BR', {
+                month: 'long',
+                year: 'numeric'
             });
             bioEl.textContent = `Um explorador de mundos literários. Juntou-se em ${data}.`;
         }
 
-        // Preenche os campos do modal de edição com os dados atuais
         const inputNome = document.getElementById('edit-nome');
         const inputNascimento = document.getElementById('edit-nascimento');
-        
+
         if (inputNome) inputNome.value = usuarioCompleto.nome || '';
         if (inputNascimento && usuarioCompleto.nascimento) {
-            // Ajustar formato de data yyyy-MM-dd para input tipo date
+
             const dataNasc = new Date(usuarioCompleto.nascimento);
             if (!isNaN(dataNasc.getTime())) {
                 inputNascimento.value = dataNasc.toISOString().split('T')[0];
@@ -46,12 +38,11 @@ async function carregarDadosUsuario(sessao) {
 
     } catch (erro) {
         console.error("Erro ao carregar dados do usuário a partir do backend:", erro);
-        // Se houver falha de autenticação (Token inválido/expirado), desloga o usuário
+
         fazerLogout();
     }
 }
 
-// Inicializa controles do modal de edição e exclusão de perfil
 document.addEventListener('DOMContentLoaded', () => {
     const modalEditar = document.getElementById('model-editar-perfil');
     const btnAbrir = document.getElementById('botao-abrir-editar');
@@ -75,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (formEditar) {
         formEditar.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const inputNome = document.getElementById('edit-nome');
             const inputNascimento = document.getElementById('edit-nascimento');
             const inputSenha = document.getElementById('edit-senha');
@@ -87,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (sucessoForm) sucessoForm.textContent = '';
 
             let valido = true;
-            // Limpa mensagens de erro individuais
+
             formEditar.querySelectorAll('.mensagem-erro').forEach(el => el.textContent = '');
 
             if (!inputNome || !inputNome.value.trim()) {
@@ -115,26 +106,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     nascimento: inputNascimento.value
                 };
 
-                // Senha só é atualizada se o usuário preencher o campo
                 if (inputSenha && inputSenha.value.trim() !== '') {
                     dadosAtualizados.senha = inputSenha.value;
                 }
 
                 const response = await atualizarPerfilAPI(dadosAtualizados);
-                
+
                 if (sucessoForm) sucessoForm.textContent = response.message || 'Perfil atualizado!';
-                
-                // Atualiza dados na sessão local para manter consistência no header
+
                 const sessao = getSessao();
                 if (sessao) {
                     sessao.nome = response.user.nome;
                     salvarSessao(sessao);
                 }
-                
-                // Recarrega informações visuais
+
                 await carregarDadosUsuario(sessao);
-                
-                // Fecha o modal após 1.5s
+
                 setTimeout(() => {
                     modalEditar.close();
                     limparMensagensErro();

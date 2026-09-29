@@ -1,4 +1,3 @@
-/* Header e navegação */
 .cabecalho {
     background: var(--bg-secundario) !important;
     backdrop-filter: var(--glass-blur);
@@ -78,7 +77,6 @@ body.tema-escuro .cabecalho {
     color: var(--cor-secundaria);
 }
 
-/* Busca */
 .form-busca {
     position: relative;
     display: flex;
@@ -120,7 +118,6 @@ body.tema-escuro .form-busca .form-control:focus {
     color: var(--placeholder);
 }
 
-/* Navbar mobile collapsed panel override for Bootstrap support */
 .cabecalho .navbar-toggler {
     border-radius: 8px;
     padding: 6px 10px;

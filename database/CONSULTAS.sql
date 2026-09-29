@@ -1,30 +1,20 @@
--- Literaverse-main/database/CONSULTAS.sql
--- Script de demonstração prática para a disciplina de BD2 / DBE2
-
 USE Literaverse;
 GO
 
--- =========================================================================
--- 1. DEMONSTRAÇÃO DE INCLUSÕES (INSERT)
--- =========================================================================
-
--- Inserir novo autor
 IF NOT EXISTS (SELECT 1 FROM Autor WHERE nome_autor LIKE '%Guimar%')
 BEGIN
-    INSERT INTO Autor (nome_autor, ano_nascimento, ano_falecimento) 
+    INSERT INTO Autor (nome_autor, ano_nascimento, ano_falecimento)
     VALUES (N'Rosa, João Guimarães', 1908, 1967);
 END
 GO
 
--- Inserir nova obra
 IF NOT EXISTS (SELECT 1 FROM Obra WHERE id_obra = 99001)
 BEGIN
-    INSERT INTO Obra (id_obra, nome_obra, descricao_obra, sinopse, faixa_etaria, capa_url) 
+    INSERT INTO Obra (id_obra, nome_obra, descricao_obra, sinopse, faixa_etaria, capa_url)
     VALUES (99001, N'Grande Sertão: Veredas', N'Obra-prima do modernismo brasileiro', N'O jagunço Riobaldo narra suas memórias e seu pacto.', 16, NULL);
 END
 GO
 
--- Vincular autor à obra na tabela associativa (Escrever)
 IF NOT EXISTS (SELECT 1 FROM Escrever WHERE id_obra = 99001)
 BEGIN
     INSERT INTO Escrever (id_obra, id_autor)
@@ -32,7 +22,6 @@ BEGIN
 END
 GO
 
--- Inserir um leitor para testes
 IF NOT EXISTS (SELECT 1 FROM Leitor WHERE id_leitor = 'user_demo_teste')
 BEGIN
     INSERT INTO Leitor (id_leitor, nome_leitor, usuario_leitor, email_leitor, senha_leitor, data_nascimento)
@@ -40,51 +29,30 @@ BEGIN
 END
 GO
 
-
--- =========================================================================
--- 2. DEMONSTRAÇÃO DE ALTERAÇÕES (UPDATE)
--- =========================================================================
-
--- Atualizar dados da obra (alterar faixa etária e sinopse)
 UPDATE Obra
 SET faixa_etaria = 18,
     sinopse = N'Sinopse atualizada: Obra clássica com reflexões existenciais e o amor por Diadorim.'
 WHERE id_obra = 99001;
 GO
 
--- Atualizar dados do leitor (alterar nome e data de nascimento)
 UPDATE Leitor
 SET nome_leitor = N'Leitor Demonstração Atualizado',
     data_nascimento = '1999-12-31'
 WHERE id_leitor = 'user_demo_teste';
 GO
 
--- Verificar resultado das alterações
 SELECT id_obra, nome_obra, faixa_etaria, sinopse FROM Obra WHERE id_obra = 99001;
 SELECT id_leitor, nome_leitor, data_nascimento FROM Leitor WHERE id_leitor = 'user_demo_teste';
 GO
 
-
--- =========================================================================
--- 3. DEMONSTRAÇÃO DE EXCLUSÕES (DELETE)
--- =========================================================================
-
--- Excluir vínculo em tabela associativa e depois a obra de teste
 DELETE FROM Escrever WHERE id_obra = 99001;
 DELETE FROM Obra WHERE id_obra = 99001;
 
--- Excluir leitor de teste
 DELETE FROM Ler WHERE id_leitor = 'user_demo_teste';
 DELETE FROM Leitor WHERE id_leitor = 'user_demo_teste';
 GO
 
-
--- =========================================================================
--- 4. CONSULTAS COMPLEXAS ÀS TABELAS RELACIONADAS (JOINs)
--- =========================================================================
-
--- 4.1. Listar obras com os respectivos autores (JOIN entre Obra, Escrever e Autor)
-SELECT 
+SELECT
     O.id_obra AS [ID Obra],
     O.nome_obra AS [Título da Obra],
     O.faixa_etaria AS [Classificação],
@@ -97,8 +65,7 @@ JOIN Autor A ON E.id_autor = A.id_autor
 ORDER BY O.nome_obra;
 GO
 
--- 4.2. Agregação e contagem de obras por autor (LEFT JOIN + GROUP BY)
-SELECT 
+SELECT
     A.id_autor AS [ID Autor],
     A.nome_autor AS [Nome do Autor],
     COUNT(E.id_obra) AS [Total de Obras Cadastradas]
@@ -108,8 +75,7 @@ GROUP BY A.id_autor, A.nome_autor
 ORDER BY [Total de Obras Cadastradas] DESC, A.nome_autor;
 GO
 
--- 4.3. Filtro por autor específico com LIKE
-SELECT 
+SELECT
     O.nome_obra AS [Obra],
     A.nome_autor AS [Autor]
 FROM Obra O
@@ -118,12 +84,6 @@ JOIN Autor A ON E.id_autor = A.id_autor
 WHERE A.nome_autor LIKE N'%Machado de Assis%';
 GO
 
-
--- =========================================================================
--- 5. CONSULTAS COM PAGINAÇÃO (OFFSET / FETCH NEXT) - Padrão DBE2
--- =========================================================================
-
--- Paginação de Obras com seus Autores (Página 1: Primeiros 3 registros)
 DECLARE @offset INT = 0;
 DECLARE @limit INT = 3;
 
@@ -133,7 +93,7 @@ WITH PaginatedWorks AS (
     ORDER BY nome_obra, id_obra
     OFFSET @offset ROWS FETCH NEXT @limit ROWS ONLY
 )
-SELECT 
+SELECT
     o.id_obra AS id,
     o.nome_obra AS titulo,
     o.descricao_obra AS descricao,

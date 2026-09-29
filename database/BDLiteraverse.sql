@@ -1,20 +1,16 @@
--- Literaverse-main/database/BDLiteraverse.sql
-
 CREATE DATABASE Literaverse;
 GO
 USE Literaverse;
 GO
 
--- Tabela de Gêneros (Criada antes para referenciamento se necessário)
 CREATE TABLE Genero(
     id_genero INT PRIMARY KEY IDENTITY(1,1),
     nome_genero VARCHAR(50) NOT NULL,
     descricao_genero VARCHAR(500) NULL
 );
 
--- Tabela de Obras (Adicionado capa_url e ajustes de tamanho)
 CREATE TABLE Obra(
-    id_obra INT PRIMARY KEY NOT NULL, -- Mantendo INT conforme books_fallback.json
+    id_obra INT PRIMARY KEY NOT NULL,
     nome_obra VARCHAR(255) NOT NULL,
     descricao_obra VARCHAR(MAX) NULL,
     sinopse VARCHAR(MAX) NULL,
@@ -22,9 +18,8 @@ CREATE TABLE Obra(
     capa_url VARCHAR(500) NULL
 );
 
--- Tabela de Leitor (Adicionado campos do users.json)
 CREATE TABLE Leitor(
-    id_leitor VARCHAR(50) PRIMARY KEY NOT NULL, -- VARCHAR para suportar "user_178..."
+    id_leitor VARCHAR(50) PRIMARY KEY NOT NULL,
     nome_leitor VARCHAR(100) NOT NULL,
     usuario_leitor VARCHAR(50) UNIQUE NOT NULL,
     email_leitor VARCHAR(100) UNIQUE NOT NULL,
@@ -34,7 +29,6 @@ CREATE TABLE Leitor(
     foto_perfil VARCHAR(500) NULL
 );
 
--- Tabela de Autor (Adicionado campos de nascimento/falecimento)
 CREATE TABLE Autor(
     id_autor INT PRIMARY KEY IDENTITY(1,1),
     nome_autor VARCHAR(100) NOT NULL,
@@ -44,7 +38,6 @@ CREATE TABLE Autor(
     ano_falecimento INT NULL
 );
 
--- Tabela de Rascunhos
 CREATE TABLE Rascunho(
     id_rascunho INT PRIMARY KEY IDENTITY(1,1),
     nome_rascunho VARCHAR(100) NOT NULL,
@@ -55,7 +48,6 @@ CREATE TABLE Rascunho(
     FOREIGN KEY (id_obra) REFERENCES Obra(id_obra)
 );
 
--- Relacionamento LER (Leitor <-> Obra)
 CREATE TABLE Ler(
     id_leitor VARCHAR(50) NOT NULL,
     id_obra INT NOT NULL,
@@ -65,7 +57,6 @@ CREATE TABLE Ler(
     FOREIGN KEY (id_obra) REFERENCES Obra(id_obra)
 );
 
--- Relacionamento Gênero da Obra
 CREATE TABLE Obra_genero(
     id_obra INT NOT NULL,
     id_genero INT NOT NULL,
@@ -74,7 +65,6 @@ CREATE TABLE Obra_genero(
     FOREIGN KEY (id_genero) REFERENCES Genero(id_genero)
 );
 
--- Relacionamento Escrever (Autor <-> Obra)
 CREATE TABLE Escrever(
     id_obra INT NOT NULL,
     id_autor INT NOT NULL,

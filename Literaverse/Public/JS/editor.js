@@ -1,10 +1,8 @@
-// Editor WYSIWYG com modal e gerenciador de rascunhos (versão consolidada)
 (function () {
     const editor = document.getElementById('editor');
     const toolbar = document.querySelector('.toolbar');
     const fontSize = document.getElementById('fontSize');
 
-    // elementos opcionais (checados antes de usar)
     const modal = document.getElementById('modalInserir');
     const formInserir = document.getElementById('formInserir');
     const tipoInserir = document.getElementById('tipoInserir');
@@ -26,7 +24,6 @@
         }
     }
 
-    // toolbar
     if (toolbar) {
         toolbar.addEventListener('click', (e) => {
             const btn = e.target.closest('button');
@@ -51,7 +48,6 @@
         });
     }
 
-    // font size handler
     if (fontSize && editor) {
         fontSize.addEventListener('change', () => {
             execFormatting('fontSize', 7);
@@ -63,7 +59,6 @@
         });
     }
 
-    // modal logic
     function openModal(type) {
         if (!modal) return;
         tipoInserir.value = (type === 'imagem') ? 'imagem' : 'link';
@@ -115,7 +110,6 @@
         return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
 
-    // rascunhos
     function getRascunhos() {
         try {
             const raw = localStorage.getItem('rascunhos_list');
@@ -215,14 +209,12 @@
         URL.revokeObjectURL(url);
     }
 
-    // autosave simples
     setInterval(() => {
         if (!editor) return;
         const content = editor.innerHTML;
         localStorage.setItem('autosave_obra', content);
     }, 5000);
 
-    // restaurar autosave se houver
     window.addEventListener('load', () => {
         const saved = localStorage.getItem('autosave_obra');
         if (saved && editor && confirm('Restaurar rascunho automático?')) {

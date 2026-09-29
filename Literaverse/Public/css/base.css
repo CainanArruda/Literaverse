@@ -1,35 +1,31 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Poppins:wght@400;500;600&display=swap');
 
-
-/* Variáveis de tema e reset base */
 :root {
-    /* Paleta HSL Coesa - Roxo e Amarelo Premium */
+
     --h-roxo: 262;
     --h-amarelo: 48;
-    
-    --cor-primaria: hsl(var(--h-roxo), 48%, 24%);     /* Roxo profundo */
-    --cor-secundaria: hsl(var(--h-roxo), 55%, 52%);   /* Roxo médio/suave */
-    --cor-terciaria: hsl(var(--h-roxo), 60%, 42%);    /* Roxo ativo */
-    --cor-destaque: hsl(var(--h-roxo), 65%, 12%);     /* Roxo escuro */
-    
-    --cor-amarela: hsl(var(--h-amarelo), 100%, 50%);  /* Amarelo Ouro */
-    --cor-amarela-hover: hsl(var(--h-amarelo), 100%, 58%);
-    --cor-amarela-contraste: hsl(var(--h-amarelo), 100%, 35%); /* Leitura em fundos claros */
 
-    /* Variáveis de Fundo e Superfície */
-    --fundo-claro: hsl(260, 24%, 97%);               /* Off-white lilás */
-    --fundo-escuro: hsl(260, 48%, 5%);                /* Preto arroxeado espacial */
-    
+    --cor-primaria: hsl(var(--h-roxo), 48%, 24%);
+    --cor-secundaria: hsl(var(--h-roxo), 55%, 52%);
+    --cor-terciaria: hsl(var(--h-roxo), 60%, 42%);
+    --cor-destaque: hsl(var(--h-roxo), 65%, 12%);
+
+    --cor-amarela: hsl(var(--h-amarelo), 100%, 50%);
+    --cor-amarela-hover: hsl(var(--h-amarelo), 100%, 58%);
+    --cor-amarela-contraste: hsl(var(--h-amarelo), 100%, 35%);
+
+    --fundo-claro: hsl(260, 24%, 97%);
+    --fundo-escuro: hsl(260, 48%, 5%);
+
     --superficie-clara: hsla(260, 20%, 93%, 0.7);
     --superficie-escura: hsla(260, 35%, 11%, 0.65);
-    
+
     --texto-claro: hsl(260, 20%, 96%);
     --texto-escuro: hsl(260, 50%, 10%);
     --texto-secundario-claro: hsla(260, 20%, 96%, 0.7);
     --texto-secundario-escuro: hsla(260, 50%, 10%, 0.65);
-    
-    /* Aliases para compatibilidade legada */
+
     --bg: var(--fundo-claro);
     --bg-secundario: var(--superficie-clara);
     --texto: var(--texto-escuro);
@@ -42,14 +38,12 @@
     --input-bg-dark: hsla(260, 35%, 8%, 0.55);
     --input-border-dark: hsla(var(--h-roxo), 40%, 65%, 0.12);
 
-    /* Glassmorphism e Efeitos */
     --glass-blur: blur(14px);
     --glass-border-light: rgba(255, 255, 255, 0.4);
     --glass-border-dark: rgba(255, 255, 255, 0.05);
     --sombra-premium: 0 10px 30px -10px rgba(107, 33, 168, 0.08);
 }
 
-/* Reset e base */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -103,7 +97,6 @@ body.tema-escuro {
     --texto-secundario: var(--texto-secundario-claro);
 }
 
-/* Container responsivo central */
 .container {
     width: 100%;
     max-width: 1200px;
@@ -111,14 +104,12 @@ body.tema-escuro {
     padding: 0 24px;
 }
 
-/* Força o navbar do Bootstrap a ser transparente */
 .cabecalho.navbar {
     background: transparent !important;
     --bs-navbar-toggler-border-color: rgba(255, 255, 255, 0.1);
     --bs-navbar-color: var(--texto);
 }
 
-/* Ajusta a cor do ícone do menu hambúrguer no tema escuro */
 body.tema-escuro .navbar-toggler-icon {
     filter: invert(1);
 }
@@ -127,9 +118,6 @@ body.tema-escuro .navbar-toggler-icon {
     font-family: 'Lora', serif;
 }
 
-
-
-/* Forçar contraste em selects nativos no tema escuro (cobre biblioteca e editor) */
 body.tema-escuro select,
 body.tema-escuro select option {
     background-color: var(--bg);
@@ -137,7 +125,6 @@ body.tema-escuro select option {
     -webkit-text-fill-color: var(--texto);
 }
 
-/* Melhora para dropdowns estilizados (filtro, toolbar, inputs) */
 body.tema-escuro .campo-filtro,
 body.tema-escuro .campo-filtro option,
 body.tema-escuro .toolbar select,

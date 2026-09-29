@@ -6,12 +6,10 @@ const userRepository = require('../repositories/userRepository');
 const { readUsers, writeUsers } = require('../utils/db');
 const UserFactory = require('../utils/userFactory');
 
-// Função auxiliar para hashear senha com SHA-256
 function hashPassword(password) {
     return crypto.createHash('sha256').update(password).digest('hex');
 }
 
-// Rota de Registro (Cadastro) com persistência no SQL Server e sincronização no JSON
 router.post('/register', async (req, res) => {
     try {
         const { nome, usuario, email, nascimento, senha } = req.body;
@@ -23,7 +21,6 @@ router.post('/register', async (req, res) => {
         const normalizedEmail = email.toLowerCase().trim();
         const normalizedUsername = usuario.trim();
 
-        // 1. Verificar duplicidades no SQL Server
         try {
             const dup = await userRepository.findDuplicate(normalizedEmail, normalizedUsername);
             if (dup) {
@@ -45,18 +42,15 @@ router.post('/register', async (req, res) => {
             }
         }
 
-        // Criptografar senha usando SHA-256
         const hashedPassword = hashPassword(senha);
         const novoUsuario = UserFactory.createUser(nome, normalizedUsername, normalizedEmail, nascimento, hashedPassword);
 
-        // 2. Persistir no SQL Server
         try {
             await userRepository.create(novoUsuario);
         } catch (sqlErr) {
             console.warn('[API Auth] Aviso ao persistir usuário no SQL Server:', sqlErr.message);
         }
 
-        // 3. Sincronizar no users.json para compatibilidade
         try {
             const users = readUsers();
             if (!users.some((u) => u.id === novoUsuario.id || u.email === novoUsuario.email)) {
@@ -67,7 +61,6 @@ router.post('/register', async (req, res) => {
             console.warn('[API Auth] Aviso ao sincronizar users.json:', jsonErr.message);
         }
 
-        // Gerar Token JWT
         const token = jwt.sign(
             { id: novoUsuario.id, email: novoUsuario.email },
             process.env.JWT_SECRET || 'literaverse_super_secret_key_123_galaxy',
@@ -89,7 +82,6 @@ router.post('/register', async (req, res) => {
     }
 });
 
-// Rota de Login com consulta no SQL Server e fallback no JSON
 router.post('/login', async (req, res) => {
     try {
         const { email, senha } = req.body;
@@ -101,14 +93,12 @@ router.post('/login', async (req, res) => {
         const normalizedIdentifier = email.toLowerCase().trim();
         let usuarioEncontrado = null;
 
-        // 1. Tenta buscar no SQL Server
         try {
             usuarioEncontrado = await userRepository.findByIdentifier(normalizedIdentifier);
         } catch (sqlErr) {
             console.warn('[API Auth] Aviso ao buscar usuário no SQL Server:', sqlErr.message);
         }
 
-        // 2. Fallback no JSON se não encontrou no SQL Server
         if (!usuarioEncontrado) {
             const users = readUsers();
             usuarioEncontrado = users.find(
@@ -120,7 +110,6 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({ message: 'Usuário não encontrado.' });
         }
 
-        // Comparar senha criptografada com SHA-256
         const hashedPassword = hashPassword(senha);
         const senhaCadastrada = usuarioEncontrado.senha || usuarioEncontrado.senha_leitor;
 
@@ -133,7 +122,6 @@ router.post('/login', async (req, res) => {
         const userNome = usuarioEncontrado.nome || usuarioEncontrado.nome_leitor;
         const userUsuario = usuarioEncontrado.usuario || usuarioEncontrado.usuario_leitor;
 
-        // Gerar Token JWT
         const token = jwt.sign(
             { id: userId, email: userEmail },
             process.env.JWT_SECRET || 'literaverse_super_secret_key_123_galaxy',

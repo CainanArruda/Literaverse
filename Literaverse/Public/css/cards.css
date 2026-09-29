@@ -1,4 +1,3 @@
-/* Cards, grids e destaques */
 .cartao-livro {
     background: var(--bg-secundario);
     border-radius: 14px;
@@ -72,7 +71,6 @@ body.tema-escuro .cartao-livro:hover {
     padding-top: 0.4rem;
 }
 
-/* Destaque e grids */
 .secao-destaque {
     padding: 4rem 0;
 }
@@ -83,7 +81,6 @@ body.tema-escuro .cartao-livro:hover {
     gap: 2rem;
 }
 
-/* Cartões de obra (perfil) */
 .cartao-obra {
     background: var(--bg-secundario);
     border-radius: 12px;
@@ -151,7 +148,6 @@ body.tema-escuro .obra-status {
     transform: translateY(-1px);
 }
 
-/* Detalhe do livro */
 .detalhe-livro .detalhe-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -295,7 +291,6 @@ body.tema-claro .CLoginP {
     color: var(--texto-secundario);
 }
 
-/* Info hover overlay */
 .info-hover {
     position: absolute;
     inset: 0;
@@ -322,4 +317,3 @@ body.tema-claro .info-hover {
     pointer-events: auto;
     transform: translateY(0);
 }
-

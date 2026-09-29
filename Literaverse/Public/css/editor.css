@@ -1,4 +1,3 @@
-/* Editor específico */
 .editor-container {
     border: 1px solid var(--borda);
     border-radius: 16px;
@@ -60,7 +59,6 @@ body.tema-escuro .toolbar select:hover {
     color: var(--cor-amarela);
 }
 
-/* Melhor contraste para select/options no editor */
 .toolbar select {
     background-color: var(--bg);
     border: 1px solid var(--borda);
@@ -95,7 +93,6 @@ body.tema-escuro .editor {
     z-index: 1;
 }
 
-/* Placeholder visual quando editor estiver vazio */
 .editor[contenteditable]:empty:before {
     content: attr(data-placeholder);
     color: var(--placeholder);
@@ -115,7 +112,6 @@ body.tema-escuro .editor {
     }
 }
 
-/* Painel de rascunhos (lado direito deslizante) */
 .rascunhos-panel {
     position: fixed;
     right: 2rem;
@@ -231,7 +227,6 @@ body.tema-escuro .rascunho-item:hover {
     width: 100%;
 }
 
-/* Modal de inserção WYSIWYG */
 .modal {
     position: fixed;
     inset: 0;

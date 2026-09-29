@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>    
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../Public/css/base.css">
     <link rel="stylesheet" href="../Public/css/layout.css">
     <link rel="stylesheet" href="../Public/css/header.css">
@@ -23,10 +23,10 @@
     <link rel="apple-touch-icon" href="../Public/Favicon/apple-touch-icon.png">
     <link rel="manifest" href="site.webmanifest">
     <meta name="theme-color" content="#4A2A5A">
-    
+
 </head>
 
-<body class="tema-claro"> <!-- O script.js vai gerenciar o tema -->
+<body class="tema-claro">
 
     <header class="cabecalho navbar navbar-expand-lg sticky-top">
         <div class="container">
@@ -49,14 +49,13 @@
 
                     <ul class="navbar-nav my-2 my-lg-0 me-lg-3">
                         <li class="nav-item">
-                            <!-- Removido 'botao-cadastro' para ser um link normal -->
+
                             <a class="botao-cadastro" href="biblioteca.html">Biblioteca</a>
                         </li>
                     </ul>
 
-                     <!-- Container de ações de autenticação -->
                     <div id="acoes-usuario-auth-container" class="acoes-usuario d-flex align-items-center my-2 my-lg-0">
-                         <!-- O JS/script.js vai preencher isso -->
+
                     </div>
 
                     <button id="alternarTema" class="botao-tema ms-2" aria-label="Alternar tema">
@@ -75,7 +74,6 @@
         </div>
     </header>
 
-
     <main class="container conteudo-principal detalhe-livro">
         <div class="detalhe-grid">
             <aside class="detalhe-imagem">
@@ -93,17 +91,17 @@
 
                 <div class="acoes-livro" role="toolbar" aria-label="Ações do livro">
                     <button class="botao-acao" id="curtirLivro" aria-pressed="false">
-                        <i class='bx  bx-heart' style="font-size: 15px;"></i> Curtir</button> 
+                        <i class='bx  bx-heart' style="font-size: 15px;"></i> Curtir</button>
                     <a class="botao-acao" href="#" download>Download</a>
                 </div>
-                
+
                 <div class="sinopse">
                     <h2 class="titulo-secao fonte-titulo">Sinopse</h2>
-                    <p> Em Dom Casmurro, o narrador Bento Santiago retoma a infância que passou na Rua de Matacavalos e 
-                        conta a história do amor e das desventuras que viveu com Capitu, uma das personagens mais enigmáticas e 
-                        intrigantes da literatura brasileira. Nas páginas deste romance, encontra-se a versão de um homem perturbado 
-                        pelo ciúme, que revela aos poucos sua psicologia complexa e enreda o leitor em sua narrativa ambígua acerca 
-                        do acontecimento ou não do adultério da mulher com olhos de ressaca, uma das maiores polêmicas da literatura 
+                    <p> Em Dom Casmurro, o narrador Bento Santiago retoma a infância que passou na Rua de Matacavalos e
+                        conta a história do amor e das desventuras que viveu com Capitu, uma das personagens mais enigmáticas e
+                        intrigantes da literatura brasileira. Nas páginas deste romance, encontra-se a versão de um homem perturbado
+                        pelo ciúme, que revela aos poucos sua psicologia complexa e enreda o leitor em sua narrativa ambígua acerca
+                        do acontecimento ou não do adultério da mulher com olhos de ressaca, uma das maiores polêmicas da literatura
                         brasileira.
                         <br><br>
                         É um romance que explora as memórias de Bento Santiago sobre sua juventude e seu
@@ -122,7 +120,7 @@
                 <div class="comentarios">
                     <h3>Comentários</h3>
                     <br>
-                    <p class="CLoginP">Você deve <a href="cadastro.html" class="CLoginA">Registrar</a> ou 
+                    <p class="CLoginP">Você deve <a href="cadastro.html" class="CLoginA">Registrar</a> ou
                         <a href="login.html" class="CLoginA">Entrar</a> para postar um comentário.</p>
                     <br>
                     <ul class="lista-comentarios">
@@ -135,7 +133,7 @@
         <div id="model-caixa">
             <dialog class="Modal" id="model">
                 <div class="Botao-fechar"><button class="botao-acao" id="FecharModal">x</button></div>
-                <form id="formulario-login"> 
+                <form id="formulario-login">
                     <div class="titulo-P">
                         <h1 class="fonte-titulo">Login</h1>
                     </div>
@@ -176,7 +174,7 @@
                          Não tem uma conta? <a href="cadastro.html" class="botao-acao"> Cadastre-se aqui</a> .
                     </p>
                 </form>
-            </dialog> 
+            </dialog>
         </div>
     </main>
 
@@ -214,12 +212,15 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         xintegrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+</script>
 
-        
-    <script src="../Public/JS/Models/authModel.js"></script>
-    <script src="../Public/JS/Controllers/loginController.js"></script>
-    <script src="../Public/JS/script.js"></script>
+    <script src="../Public/JS/Models/authModel.js">
+</script>
+    <script src="../Public/JS/Controllers/loginController.js">
+</script>
+    <script src="../Public/JS/script.js">
+</script>
 </body>
 
 </html>

@@ -1,5 +1,3 @@
-/* Responsividade e ajustes finais */
-
 @media (max-width:1200px) {
 
     .grid-obras,
@@ -113,7 +111,6 @@
         font-size: 1rem
     }
 
-
 }
 
 @media (min-width: 640px) {
@@ -144,7 +141,6 @@
     }
 }
 
-/* reduced motion */
 @media (prefers-reduced-motion:reduce) {
     .cartao-livro:hover {
         transform: none
